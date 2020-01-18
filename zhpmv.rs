@@ -1,8 +1,8 @@
-use ::libc;
+use libc;
 /* f2c.h  --  Standard Fortran to C header file */
 /* *  barf  [ba:rf]  2.  "He suggested using FORTRAN, and everybody barfed."
 
-	- From The Shogakukan DICTIONARY OF NEW ENGLISH (Second edition) */
+- From The Shogakukan DICTIONARY OF NEW ENGLISH (Second edition) */
 pub type integer = libc::c_long;
 pub type doublereal = libc::c_double;
 #[derive(Copy, Clone)]
@@ -14,26 +14,28 @@ pub struct doublecomplex {
 pub type logical = libc::c_long;
 /* zhpmv.f -- translated by f2c (version 20061008).
    You must link the resulting object file with libf2c:
-	on Microsoft Windows system, link with libf2c.lib;
-	on Linux or Unix systems, link with .../path/to/libf2c.a -lm
-	or, if you install libf2c.a in a standard place, with -lf2c -lm
-	-- in that order, at the end of the command line, as in
-		cc *.o -lf2c -lm
-	Source for libf2c is in /netlib/f2c/libf2c.zip, e.g.,
+    on Microsoft Windows system, link with libf2c.lib;
+    on Linux or Unix systems, link with .../path/to/libf2c.a -lm
+    or, if you install libf2c.a in a standard place, with -lf2c -lm
+    -- in that order, at the end of the command line, as in
+        cc *.o -lf2c -lm
+    Source for libf2c is in /netlib/f2c/libf2c.zip, e.g.,
 
-		http://www.netlib.org/f2c/libf2c.zip
+        http://www.netlib.org/f2c/libf2c.zip
 */
 /* Subroutine */
 #[no_mangle]
-pub unsafe extern "C" fn f2c_zhpmv(mut uplo: *mut libc::c_char,
-                                   mut n: *mut integer,
-                                   mut alpha: *mut doublecomplex,
-                                   mut ap: *mut doublecomplex,
-                                   mut x: *mut doublecomplex,
-                                   mut incx: *mut integer,
-                                   mut beta: *mut doublecomplex,
-                                   mut y: *mut doublecomplex,
-                                   mut incy: *mut integer) -> libc::c_int {
+pub unsafe extern "C" fn f2c_zhpmv(
+    mut uplo: *mut libc::c_char,
+    mut n: *mut integer,
+    mut alpha: *mut doublecomplex,
+    mut ap: *mut doublecomplex,
+    mut x: *mut doublecomplex,
+    mut incx: *mut integer,
+    mut beta: *mut doublecomplex,
+    mut y: *mut doublecomplex,
+    mut incy: *mut integer,
+) -> libc::c_int {
     /* System generated locals */
     let mut i__1: integer = 0;
     let mut i__2: integer = 0;
@@ -41,10 +43,10 @@ pub unsafe extern "C" fn f2c_zhpmv(mut uplo: *mut libc::c_char,
     let mut i__4: integer = 0;
     let mut i__5: integer = 0;
     let mut d__1: doublereal = 0.;
-    let mut z__1: doublecomplex = doublecomplex{r: 0., i: 0.,};
-    let mut z__2: doublecomplex = doublecomplex{r: 0., i: 0.,};
-    let mut z__3: doublecomplex = doublecomplex{r: 0., i: 0.,};
-    let mut z__4: doublecomplex = doublecomplex{r: 0., i: 0.,};
+    let mut z__1: doublecomplex = doublecomplex { r: 0., i: 0. };
+    let mut z__2: doublecomplex = doublecomplex { r: 0., i: 0. };
+    let mut z__3: doublecomplex = doublecomplex { r: 0., i: 0. };
+    let mut z__4: doublecomplex = doublecomplex { r: 0., i: 0. };
     /* Builtin functions */
     extern "C" {
         #[link_name = "d_cnjg"]
@@ -62,8 +64,8 @@ pub unsafe extern "C" fn f2c_zhpmv(mut uplo: *mut libc::c_char,
     let mut kx: integer = 0;
     let mut ky: integer = 0;
     let mut info: integer = 0;
-    let mut temp1: doublecomplex = doublecomplex{r: 0., i: 0.,};
-    let mut temp2: doublecomplex = doublecomplex{r: 0., i: 0.,};
+    let mut temp1: doublecomplex = doublecomplex { r: 0., i: 0. };
+    let mut temp2: doublecomplex = doublecomplex { r: 0., i: 0. };
     extern "C" {
         #[link_name = "lsame_"]
         fn lsame__0(_: *mut libc::c_char, _: *mut libc::c_char) -> logical;
@@ -73,86 +75,86 @@ pub unsafe extern "C" fn f2c_zhpmv(mut uplo: *mut libc::c_char,
         fn xerbla__0(_: *mut libc::c_char, _: *mut integer) -> libc::c_int;
     }
     /*     .. Scalar Arguments .. */
-/*     .. */
-/*     .. Array Arguments .. */
-/*     .. */
+    /*     .. */
+    /*     .. Array Arguments .. */
+    /*     .. */
     /*  Purpose */
-/*  ======= */
+    /*  ======= */
     /*  ZHPMV  performs the matrix-vector operation */
     /*     y := alpha*A*x + beta*y, */
     /*  where alpha and beta are scalars, x and y are n element vectors and */
-/*  A is an n by n hermitian matrix, supplied in packed form. */
+    /*  A is an n by n hermitian matrix, supplied in packed form. */
     /*  Arguments */
-/*  ========== */
+    /*  ========== */
     /*  UPLO   - CHARACTER*1. */
-/*           On entry, UPLO specifies whether the upper or lower */
-/*           triangular part of the matrix A is supplied in the packed */
-/*           array AP as follows: */
+    /*           On entry, UPLO specifies whether the upper or lower */
+    /*           triangular part of the matrix A is supplied in the packed */
+    /*           array AP as follows: */
     /*              UPLO = 'U' or 'u'   The upper triangular part of A is */
-/*                                  supplied in AP. */
+    /*                                  supplied in AP. */
     /*              UPLO = 'L' or 'l'   The lower triangular part of A is */
-/*                                  supplied in AP. */
+    /*                                  supplied in AP. */
     /*           Unchanged on exit. */
     /*  N      - INTEGER. */
-/*           On entry, N specifies the order of the matrix A. */
-/*           N must be at least zero. */
-/*           Unchanged on exit. */
+    /*           On entry, N specifies the order of the matrix A. */
+    /*           N must be at least zero. */
+    /*           Unchanged on exit. */
     /*  ALPHA  - COMPLEX*16      . */
-/*           On entry, ALPHA specifies the scalar alpha. */
-/*           Unchanged on exit. */
+    /*           On entry, ALPHA specifies the scalar alpha. */
+    /*           Unchanged on exit. */
     /*  AP     - COMPLEX*16       array of DIMENSION at least */
-/*           ( ( n*( n + 1 ) )/2 ). */
-/*           Before entry with UPLO = 'U' or 'u', the array AP must */
-/*           contain the upper triangular part of the hermitian matrix */
-/*           packed sequentially, column by column, so that AP( 1 ) */
-/*           contains a( 1, 1 ), AP( 2 ) and AP( 3 ) contain a( 1, 2 ) */
-/*           and a( 2, 2 ) respectively, and so on. */
-/*           Before entry with UPLO = 'L' or 'l', the array AP must */
-/*           contain the lower triangular part of the hermitian matrix */
-/*           packed sequentially, column by column, so that AP( 1 ) */
-/*           contains a( 1, 1 ), AP( 2 ) and AP( 3 ) contain a( 2, 1 ) */
-/*           and a( 3, 1 ) respectively, and so on. */
-/*           Note that the imaginary parts of the diagonal elements need */
-/*           not be set and are assumed to be zero. */
-/*           Unchanged on exit. */
+    /*           ( ( n*( n + 1 ) )/2 ). */
+    /*           Before entry with UPLO = 'U' or 'u', the array AP must */
+    /*           contain the upper triangular part of the hermitian matrix */
+    /*           packed sequentially, column by column, so that AP( 1 ) */
+    /*           contains a( 1, 1 ), AP( 2 ) and AP( 3 ) contain a( 1, 2 ) */
+    /*           and a( 2, 2 ) respectively, and so on. */
+    /*           Before entry with UPLO = 'L' or 'l', the array AP must */
+    /*           contain the lower triangular part of the hermitian matrix */
+    /*           packed sequentially, column by column, so that AP( 1 ) */
+    /*           contains a( 1, 1 ), AP( 2 ) and AP( 3 ) contain a( 2, 1 ) */
+    /*           and a( 3, 1 ) respectively, and so on. */
+    /*           Note that the imaginary parts of the diagonal elements need */
+    /*           not be set and are assumed to be zero. */
+    /*           Unchanged on exit. */
     /*  X      - COMPLEX*16       array of dimension at least */
-/*           ( 1 + ( n - 1 )*abs( INCX ) ). */
-/*           Before entry, the incremented array X must contain the n */
-/*           element vector x. */
-/*           Unchanged on exit. */
+    /*           ( 1 + ( n - 1 )*abs( INCX ) ). */
+    /*           Before entry, the incremented array X must contain the n */
+    /*           element vector x. */
+    /*           Unchanged on exit. */
     /*  INCX   - INTEGER. */
-/*           On entry, INCX specifies the increment for the elements of */
-/*           X. INCX must not be zero. */
-/*           Unchanged on exit. */
+    /*           On entry, INCX specifies the increment for the elements of */
+    /*           X. INCX must not be zero. */
+    /*           Unchanged on exit. */
     /*  BETA   - COMPLEX*16      . */
-/*           On entry, BETA specifies the scalar beta. When BETA is */
-/*           supplied as zero then Y need not be set on input. */
-/*           Unchanged on exit. */
+    /*           On entry, BETA specifies the scalar beta. When BETA is */
+    /*           supplied as zero then Y need not be set on input. */
+    /*           Unchanged on exit. */
     /*  Y      - COMPLEX*16       array of dimension at least */
-/*           ( 1 + ( n - 1 )*abs( INCY ) ). */
-/*           Before entry, the incremented array Y must contain the n */
-/*           element vector y. On exit, Y is overwritten by the updated */
-/*           vector y. */
+    /*           ( 1 + ( n - 1 )*abs( INCY ) ). */
+    /*           Before entry, the incremented array Y must contain the n */
+    /*           element vector y. On exit, Y is overwritten by the updated */
+    /*           vector y. */
     /*  INCY   - INTEGER. */
-/*           On entry, INCY specifies the increment for the elements of */
-/*           Y. INCY must not be zero. */
-/*           Unchanged on exit. */
+    /*           On entry, INCY specifies the increment for the elements of */
+    /*           Y. INCY must not be zero. */
+    /*           Unchanged on exit. */
     /*  Level 2 Blas routine. */
     /*  -- Written on 22-October-1986. */
-/*     Jack Dongarra, Argonne National Lab. */
-/*     Jeremy Du Croz, Nag Central Office. */
-/*     Sven Hammarling, Nag Central Office. */
-/*     Richard Hanson, Sandia National Labs. */
+    /*     Jack Dongarra, Argonne National Lab. */
+    /*     Jeremy Du Croz, Nag Central Office. */
+    /*     Sven Hammarling, Nag Central Office. */
+    /*     Richard Hanson, Sandia National Labs. */
     /*     .. Parameters .. */
-/*     .. */
-/*     .. Local Scalars .. */
-/*     .. */
-/*     .. External Functions .. */
-/*     .. */
-/*     .. External Subroutines .. */
-/*     .. */
-/*     .. Intrinsic Functions .. */
-/*     .. */
+    /*     .. */
+    /*     .. Local Scalars .. */
+    /*     .. */
+    /*     .. External Functions .. */
+    /*     .. */
+    /*     .. External Subroutines .. */
+    /*     .. */
+    /*     .. Intrinsic Functions .. */
+    /*     .. */
     /*     Test the input parameters. */
     /* Parameter adjustments */
     y = y.offset(-1);
@@ -160,12 +162,15 @@ pub unsafe extern "C" fn f2c_zhpmv(mut uplo: *mut libc::c_char,
     ap = ap.offset(-1);
     /* Function Body */
     info = 0 as libc::c_int as integer;
-    if lsame__0(uplo,
-                b"U\x00" as *const u8 as *const libc::c_char as
-                    *mut libc::c_char) == 0 &&
-           lsame__0(uplo,
-                    b"L\x00" as *const u8 as *const libc::c_char as
-                        *mut libc::c_char) == 0 {
+    if lsame__0(
+        uplo,
+        b"U\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+    ) == 0
+        && lsame__0(
+            uplo,
+            b"L\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+        ) == 0
+    {
         info = 1 as libc::c_int as integer
     } else if *n < 0 as libc::c_int as libc::c_long {
         info = 2 as libc::c_int as integer
@@ -175,33 +180,33 @@ pub unsafe extern "C" fn f2c_zhpmv(mut uplo: *mut libc::c_char,
         info = 9 as libc::c_int as integer
     }
     if info != 0 as libc::c_int as libc::c_long {
-        xerbla__0(b"ZHPMV \x00" as *const u8 as *const libc::c_char as
-                      *mut libc::c_char, &mut info);
-        return 0 as libc::c_int
+        xerbla__0(
+            b"ZHPMV \x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+            &mut info,
+        );
+        return 0 as libc::c_int;
     }
     /*     Quick return if possible. */
-    if *n == 0 as libc::c_int as libc::c_long ||
-           (*alpha).r == 0.0f64 && (*alpha).i == 0.0f64 &&
-               ((*beta).r == 1.0f64 && (*beta).i == 0.0f64) {
-        return 0 as libc::c_int
+    if *n == 0 as libc::c_int as libc::c_long
+        || (*alpha).r == 0.0f64
+            && (*alpha).i == 0.0f64
+            && ((*beta).r == 1.0f64 && (*beta).i == 0.0f64)
+    {
+        return 0 as libc::c_int;
     }
     /*     Set up the start points in  X  and  Y. */
     if *incx > 0 as libc::c_int as libc::c_long {
         kx = 1 as libc::c_int as integer
     } else {
-        kx =
-            1 as libc::c_int as libc::c_long -
-                (*n - 1 as libc::c_int as libc::c_long) * *incx
+        kx = 1 as libc::c_int as libc::c_long - (*n - 1 as libc::c_int as libc::c_long) * *incx
     }
     if *incy > 0 as libc::c_int as libc::c_long {
         ky = 1 as libc::c_int as integer
     } else {
-        ky =
-            1 as libc::c_int as libc::c_long -
-                (*n - 1 as libc::c_int as libc::c_long) * *incy
+        ky = 1 as libc::c_int as libc::c_long - (*n - 1 as libc::c_int as libc::c_long) * *incy
     }
     /*     Start the operations. In this version the elements of the array AP */
-/*     are accessed sequentially with one pass through AP. */
+    /*     are accessed sequentially with one pass through AP. */
     /*     First form  y := beta*y. */
     if (*beta).r != 1.0f64 || (*beta).i != 0.0f64 {
         if *incy == 1 as libc::c_int as libc::c_long {
@@ -221,12 +226,10 @@ pub unsafe extern "C" fn f2c_zhpmv(mut uplo: *mut libc::c_char,
                 while i__ <= i__1 {
                     i__2 = i__;
                     i__3 = i__;
-                    z__1.r =
-                        (*beta).r * (*y.offset(i__3 as isize)).r -
-                            (*beta).i * (*y.offset(i__3 as isize)).i;
-                    z__1.i =
-                        (*beta).r * (*y.offset(i__3 as isize)).i +
-                            (*beta).i * (*y.offset(i__3 as isize)).r;
+                    z__1.r = (*beta).r * (*y.offset(i__3 as isize)).r
+                        - (*beta).i * (*y.offset(i__3 as isize)).i;
+                    z__1.i = (*beta).r * (*y.offset(i__3 as isize)).i
+                        + (*beta).i * (*y.offset(i__3 as isize)).r;
                     (*y.offset(i__2 as isize)).r = z__1.r;
                     (*y.offset(i__2 as isize)).i = z__1.i;
                     i__ += 1
@@ -252,12 +255,10 @@ pub unsafe extern "C" fn f2c_zhpmv(mut uplo: *mut libc::c_char,
                 while i__ <= i__1 {
                     i__2 = iy;
                     i__3 = iy;
-                    z__1.r =
-                        (*beta).r * (*y.offset(i__3 as isize)).r -
-                            (*beta).i * (*y.offset(i__3 as isize)).i;
-                    z__1.i =
-                        (*beta).r * (*y.offset(i__3 as isize)).i +
-                            (*beta).i * (*y.offset(i__3 as isize)).r;
+                    z__1.r = (*beta).r * (*y.offset(i__3 as isize)).r
+                        - (*beta).i * (*y.offset(i__3 as isize)).i;
+                    z__1.i = (*beta).r * (*y.offset(i__3 as isize)).i
+                        + (*beta).i * (*y.offset(i__3 as isize)).r;
                     (*y.offset(i__2 as isize)).r = z__1.r;
                     (*y.offset(i__2 as isize)).i = z__1.i;
                     iy += *incy;
@@ -268,25 +269,24 @@ pub unsafe extern "C" fn f2c_zhpmv(mut uplo: *mut libc::c_char,
         }
     }
     if (*alpha).r == 0.0f64 && (*alpha).i == 0.0f64 {
-        return 0 as libc::c_int
+        return 0 as libc::c_int;
     }
     kk = 1 as libc::c_int as integer;
-    if lsame__0(uplo,
-                b"U\x00" as *const u8 as *const libc::c_char as
-                    *mut libc::c_char) != 0 {
+    if lsame__0(
+        uplo,
+        b"U\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+    ) != 0
+    {
         /*        Form  y  when AP contains the upper triangle. */
-        if *incx == 1 as libc::c_int as libc::c_long &&
-               *incy == 1 as libc::c_int as libc::c_long {
+        if *incx == 1 as libc::c_int as libc::c_long && *incy == 1 as libc::c_int as libc::c_long {
             i__1 = *n;
             j = 1 as libc::c_int as integer;
             while j <= i__1 {
                 i__2 = j;
-                z__1.r =
-                    (*alpha).r * (*x.offset(i__2 as isize)).r -
-                        (*alpha).i * (*x.offset(i__2 as isize)).i;
-                z__1.i =
-                    (*alpha).r * (*x.offset(i__2 as isize)).i +
-                        (*alpha).i * (*x.offset(i__2 as isize)).r;
+                z__1.r = (*alpha).r * (*x.offset(i__2 as isize)).r
+                    - (*alpha).i * (*x.offset(i__2 as isize)).i;
+                z__1.i = (*alpha).r * (*x.offset(i__2 as isize)).i
+                    + (*alpha).i * (*x.offset(i__2 as isize)).r;
                 temp1.r = z__1.r;
                 temp1.i = z__1.i;
                 temp2.r = 0.0f64;
@@ -298,24 +298,20 @@ pub unsafe extern "C" fn f2c_zhpmv(mut uplo: *mut libc::c_char,
                     i__3 = i__;
                     i__4 = i__;
                     i__5 = k;
-                    z__2.r =
-                        temp1.r * (*ap.offset(i__5 as isize)).r -
-                            temp1.i * (*ap.offset(i__5 as isize)).i;
-                    z__2.i =
-                        temp1.r * (*ap.offset(i__5 as isize)).i +
-                            temp1.i * (*ap.offset(i__5 as isize)).r;
+                    z__2.r = temp1.r * (*ap.offset(i__5 as isize)).r
+                        - temp1.i * (*ap.offset(i__5 as isize)).i;
+                    z__2.i = temp1.r * (*ap.offset(i__5 as isize)).i
+                        + temp1.i * (*ap.offset(i__5 as isize)).r;
                     z__1.r = (*y.offset(i__4 as isize)).r + z__2.r;
                     z__1.i = (*y.offset(i__4 as isize)).i + z__2.i;
                     (*y.offset(i__3 as isize)).r = z__1.r;
                     (*y.offset(i__3 as isize)).i = z__1.i;
                     d_cnjg_0(&mut z__3, &mut *ap.offset(k as isize));
                     i__3 = i__;
-                    z__2.r =
-                        z__3.r * (*x.offset(i__3 as isize)).r -
-                            z__3.i * (*x.offset(i__3 as isize)).i;
-                    z__2.i =
-                        z__3.r * (*x.offset(i__3 as isize)).i +
-                            z__3.i * (*x.offset(i__3 as isize)).r;
+                    z__2.r = z__3.r * (*x.offset(i__3 as isize)).r
+                        - z__3.i * (*x.offset(i__3 as isize)).i;
+                    z__2.i = z__3.r * (*x.offset(i__3 as isize)).i
+                        + z__3.i * (*x.offset(i__3 as isize)).r;
                     z__1.r = temp2.r + z__2.r;
                     z__1.i = temp2.i + z__2.i;
                     temp2.r = z__1.r;
@@ -349,12 +345,10 @@ pub unsafe extern "C" fn f2c_zhpmv(mut uplo: *mut libc::c_char,
             j = 1 as libc::c_int as integer;
             while j <= i__1 {
                 i__2 = jx;
-                z__1.r =
-                    (*alpha).r * (*x.offset(i__2 as isize)).r -
-                        (*alpha).i * (*x.offset(i__2 as isize)).i;
-                z__1.i =
-                    (*alpha).r * (*x.offset(i__2 as isize)).i +
-                        (*alpha).i * (*x.offset(i__2 as isize)).r;
+                z__1.r = (*alpha).r * (*x.offset(i__2 as isize)).r
+                    - (*alpha).i * (*x.offset(i__2 as isize)).i;
+                z__1.i = (*alpha).r * (*x.offset(i__2 as isize)).i
+                    + (*alpha).i * (*x.offset(i__2 as isize)).r;
                 temp1.r = z__1.r;
                 temp1.i = z__1.i;
                 temp2.r = 0.0f64;
@@ -367,24 +361,20 @@ pub unsafe extern "C" fn f2c_zhpmv(mut uplo: *mut libc::c_char,
                     i__3 = iy;
                     i__4 = iy;
                     i__5 = k;
-                    z__2.r =
-                        temp1.r * (*ap.offset(i__5 as isize)).r -
-                            temp1.i * (*ap.offset(i__5 as isize)).i;
-                    z__2.i =
-                        temp1.r * (*ap.offset(i__5 as isize)).i +
-                            temp1.i * (*ap.offset(i__5 as isize)).r;
+                    z__2.r = temp1.r * (*ap.offset(i__5 as isize)).r
+                        - temp1.i * (*ap.offset(i__5 as isize)).i;
+                    z__2.i = temp1.r * (*ap.offset(i__5 as isize)).i
+                        + temp1.i * (*ap.offset(i__5 as isize)).r;
                     z__1.r = (*y.offset(i__4 as isize)).r + z__2.r;
                     z__1.i = (*y.offset(i__4 as isize)).i + z__2.i;
                     (*y.offset(i__3 as isize)).r = z__1.r;
                     (*y.offset(i__3 as isize)).i = z__1.i;
                     d_cnjg_0(&mut z__3, &mut *ap.offset(k as isize));
                     i__3 = ix;
-                    z__2.r =
-                        z__3.r * (*x.offset(i__3 as isize)).r -
-                            z__3.i * (*x.offset(i__3 as isize)).i;
-                    z__2.i =
-                        z__3.r * (*x.offset(i__3 as isize)).i +
-                            z__3.i * (*x.offset(i__3 as isize)).r;
+                    z__2.r = z__3.r * (*x.offset(i__3 as isize)).r
+                        - z__3.i * (*x.offset(i__3 as isize)).i;
+                    z__2.i = z__3.r * (*x.offset(i__3 as isize)).i
+                        + z__3.i * (*x.offset(i__3 as isize)).r;
                     z__1.r = temp2.r + z__2.r;
                     z__1.i = temp2.i + z__2.i;
                     temp2.r = z__1.r;
@@ -415,18 +405,16 @@ pub unsafe extern "C" fn f2c_zhpmv(mut uplo: *mut libc::c_char,
                 j += 1
             }
         }
-    } else if *incx == 1 as libc::c_int as libc::c_long &&
-                  *incy == 1 as libc::c_int as libc::c_long {
+    } else if *incx == 1 as libc::c_int as libc::c_long && *incy == 1 as libc::c_int as libc::c_long
+    {
         i__1 = *n;
         j = 1 as libc::c_int as integer;
         while j <= i__1 {
             i__2 = j;
-            z__1.r =
-                (*alpha).r * (*x.offset(i__2 as isize)).r -
-                    (*alpha).i * (*x.offset(i__2 as isize)).i;
-            z__1.i =
-                (*alpha).r * (*x.offset(i__2 as isize)).i +
-                    (*alpha).i * (*x.offset(i__2 as isize)).r;
+            z__1.r = (*alpha).r * (*x.offset(i__2 as isize)).r
+                - (*alpha).i * (*x.offset(i__2 as isize)).i;
+            z__1.i = (*alpha).r * (*x.offset(i__2 as isize)).i
+                + (*alpha).i * (*x.offset(i__2 as isize)).r;
             temp1.r = z__1.r;
             temp1.i = z__1.i;
             temp2.r = 0.0f64;
@@ -448,12 +436,10 @@ pub unsafe extern "C" fn f2c_zhpmv(mut uplo: *mut libc::c_char,
                 i__3 = i__;
                 i__4 = i__;
                 i__5 = k;
-                z__2.r =
-                    temp1.r * (*ap.offset(i__5 as isize)).r -
-                        temp1.i * (*ap.offset(i__5 as isize)).i;
-                z__2.i =
-                    temp1.r * (*ap.offset(i__5 as isize)).i +
-                        temp1.i * (*ap.offset(i__5 as isize)).r;
+                z__2.r = temp1.r * (*ap.offset(i__5 as isize)).r
+                    - temp1.i * (*ap.offset(i__5 as isize)).i;
+                z__2.i = temp1.r * (*ap.offset(i__5 as isize)).i
+                    + temp1.i * (*ap.offset(i__5 as isize)).r;
                 z__1.r = (*y.offset(i__4 as isize)).r + z__2.r;
                 z__1.i = (*y.offset(i__4 as isize)).i + z__2.i;
                 (*y.offset(i__3 as isize)).r = z__1.r;
@@ -461,11 +447,9 @@ pub unsafe extern "C" fn f2c_zhpmv(mut uplo: *mut libc::c_char,
                 d_cnjg_0(&mut z__3, &mut *ap.offset(k as isize));
                 i__3 = i__;
                 z__2.r =
-                    z__3.r * (*x.offset(i__3 as isize)).r -
-                        z__3.i * (*x.offset(i__3 as isize)).i;
+                    z__3.r * (*x.offset(i__3 as isize)).r - z__3.i * (*x.offset(i__3 as isize)).i;
                 z__2.i =
-                    z__3.r * (*x.offset(i__3 as isize)).i +
-                        z__3.i * (*x.offset(i__3 as isize)).r;
+                    z__3.r * (*x.offset(i__3 as isize)).i + z__3.i * (*x.offset(i__3 as isize)).r;
                 z__1.r = temp2.r + z__2.r;
                 z__1.i = temp2.i + z__2.i;
                 temp2.r = z__1.r;
@@ -494,12 +478,10 @@ pub unsafe extern "C" fn f2c_zhpmv(mut uplo: *mut libc::c_char,
         j = 1 as libc::c_int as integer;
         while j <= i__1 {
             i__2 = jx;
-            z__1.r =
-                (*alpha).r * (*x.offset(i__2 as isize)).r -
-                    (*alpha).i * (*x.offset(i__2 as isize)).i;
-            z__1.i =
-                (*alpha).r * (*x.offset(i__2 as isize)).i +
-                    (*alpha).i * (*x.offset(i__2 as isize)).r;
+            z__1.r = (*alpha).r * (*x.offset(i__2 as isize)).r
+                - (*alpha).i * (*x.offset(i__2 as isize)).i;
+            z__1.i = (*alpha).r * (*x.offset(i__2 as isize)).i
+                + (*alpha).i * (*x.offset(i__2 as isize)).r;
             temp1.r = z__1.r;
             temp1.i = z__1.i;
             temp2.r = 0.0f64;
@@ -524,12 +506,10 @@ pub unsafe extern "C" fn f2c_zhpmv(mut uplo: *mut libc::c_char,
                 i__3 = iy;
                 i__4 = iy;
                 i__5 = k;
-                z__2.r =
-                    temp1.r * (*ap.offset(i__5 as isize)).r -
-                        temp1.i * (*ap.offset(i__5 as isize)).i;
-                z__2.i =
-                    temp1.r * (*ap.offset(i__5 as isize)).i +
-                        temp1.i * (*ap.offset(i__5 as isize)).r;
+                z__2.r = temp1.r * (*ap.offset(i__5 as isize)).r
+                    - temp1.i * (*ap.offset(i__5 as isize)).i;
+                z__2.i = temp1.r * (*ap.offset(i__5 as isize)).i
+                    + temp1.i * (*ap.offset(i__5 as isize)).r;
                 z__1.r = (*y.offset(i__4 as isize)).r + z__2.r;
                 z__1.i = (*y.offset(i__4 as isize)).i + z__2.i;
                 (*y.offset(i__3 as isize)).r = z__1.r;
@@ -537,11 +517,9 @@ pub unsafe extern "C" fn f2c_zhpmv(mut uplo: *mut libc::c_char,
                 d_cnjg_0(&mut z__3, &mut *ap.offset(k as isize));
                 i__3 = ix;
                 z__2.r =
-                    z__3.r * (*x.offset(i__3 as isize)).r -
-                        z__3.i * (*x.offset(i__3 as isize)).i;
+                    z__3.r * (*x.offset(i__3 as isize)).r - z__3.i * (*x.offset(i__3 as isize)).i;
                 z__2.i =
-                    z__3.r * (*x.offset(i__3 as isize)).i +
-                        z__3.i * (*x.offset(i__3 as isize)).r;
+                    z__3.r * (*x.offset(i__3 as isize)).i + z__3.i * (*x.offset(i__3 as isize)).r;
                 z__1.r = temp2.r + z__2.r;
                 z__1.i = temp2.i + z__2.i;
                 temp2.r = z__1.r;

@@ -1,4 +1,4 @@
-use ::libc;
+use libc;
 extern "C" {
     #[no_mangle]
     fn sqrt(_: libc::c_double) -> libc::c_double;
@@ -12,28 +12,30 @@ pub struct doublecomplex {
 }
 /* zrotg.f -- translated by f2c (version 20061008).
    You must link the resulting object file with libf2c:
-	on Microsoft Windows system, link with libf2c.lib;
-	on Linux or Unix systems, link with .../path/to/libf2c.a -lm
-	or, if you install libf2c.a in a standard place, with -lf2c -lm
-	-- in that order, at the end of the command line, as in
-		cc *.o -lf2c -lm
-	Source for libf2c is in /netlib/f2c/libf2c.zip, e.g.,
+    on Microsoft Windows system, link with libf2c.lib;
+    on Linux or Unix systems, link with .../path/to/libf2c.a -lm
+    or, if you install libf2c.a in a standard place, with -lf2c -lm
+    -- in that order, at the end of the command line, as in
+        cc *.o -lf2c -lm
+    Source for libf2c is in /netlib/f2c/libf2c.zip, e.g.,
 
-		http://www.netlib.org/f2c/libf2c.zip
+        http://www.netlib.org/f2c/libf2c.zip
 */
 /* Subroutine */
 #[no_mangle]
-pub unsafe extern "C" fn f2c_zrotg(mut ca: *mut doublecomplex,
-                                   mut cb: *mut doublecomplex,
-                                   mut c__: *mut doublereal,
-                                   mut s: *mut doublecomplex) -> libc::c_int {
+pub unsafe extern "C" fn f2c_zrotg(
+    mut ca: *mut doublecomplex,
+    mut cb: *mut doublecomplex,
+    mut c__: *mut doublereal,
+    mut s: *mut doublecomplex,
+) -> libc::c_int {
     /* System generated locals */
     let mut d__1: doublereal = 0.;
     let mut d__2: doublereal = 0.;
-    let mut z__1: doublecomplex = doublecomplex{r: 0., i: 0.,};
-    let mut z__2: doublecomplex = doublecomplex{r: 0., i: 0.,};
-    let mut z__3: doublecomplex = doublecomplex{r: 0., i: 0.,};
-    let mut z__4: doublecomplex = doublecomplex{r: 0., i: 0.,};
+    let mut z__1: doublecomplex = doublecomplex { r: 0., i: 0. };
+    let mut z__2: doublecomplex = doublecomplex { r: 0., i: 0. };
+    let mut z__3: doublecomplex = doublecomplex { r: 0., i: 0. };
+    let mut z__4: doublecomplex = doublecomplex { r: 0., i: 0. };
     /* Builtin functions */
     extern "C" {
         #[link_name = "z_abs"]
@@ -41,8 +43,7 @@ pub unsafe extern "C" fn f2c_zrotg(mut ca: *mut doublecomplex,
     }
     extern "C" {
         #[link_name = "z_div"]
-        fn z_div_0(_: *mut doublecomplex, _: *mut doublecomplex,
-                   _: *mut doublecomplex);
+        fn z_div_0(_: *mut doublecomplex, _: *mut doublecomplex, _: *mut doublecomplex);
     }
     extern "C" {
         #[link_name = "d_cnjg"]
@@ -50,17 +51,17 @@ pub unsafe extern "C" fn f2c_zrotg(mut ca: *mut doublecomplex,
     }
     /* Local variables */
     let mut norm: doublereal = 0.;
-    let mut alpha: doublecomplex = doublecomplex{r: 0., i: 0.,};
+    let mut alpha: doublecomplex = doublecomplex { r: 0., i: 0. };
     let mut scale: doublereal = 0.;
     /*     .. Scalar Arguments .. */
-/*     .. */
+    /*     .. */
     /*  Purpose */
-/*  ======= */
+    /*  ======= */
     /*     determines a double complex Givens rotation. */
     /*     .. Local Scalars .. */
-/*     .. */
-/*     .. Intrinsic Functions .. */
-/*     .. */
+    /*     .. */
+    /*     .. Intrinsic Functions .. */
+    /*     .. */
     if z_abs_0(ca) != 0.0f64 {
         scale = z_abs_0(ca) + z_abs_0(cb);
         z__2.r = scale;

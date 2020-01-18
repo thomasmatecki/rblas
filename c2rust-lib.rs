@@ -9,11 +9,7 @@
 #![feature(register_tool)]
 #![register_tool(c2rust)]
 
-
-
 extern crate libc;
-
-
 
 pub mod caxpy;
 pub mod ccopy;
@@ -166,4 +162,3 @@ pub mod ztrmm;
 pub mod ztrmv;
 pub mod ztrsm;
 pub mod ztrsv;
-

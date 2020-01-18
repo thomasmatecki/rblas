@@ -1,32 +1,34 @@
-use ::libc;
+use libc;
 /* f2c.h  --  Standard Fortran to C header file */
 /* *  barf  [ba:rf]  2.  "He suggested using FORTRAN, and everybody barfed."
 
-	- From The Shogakukan DICTIONARY OF NEW ENGLISH (Second edition) */
+- From The Shogakukan DICTIONARY OF NEW ENGLISH (Second edition) */
 pub type integer = libc::c_long;
 pub type doublereal = libc::c_double;
 pub type logical = libc::c_long;
 /* dtrmv.f -- translated by f2c (version 20061008).
    You must link the resulting object file with libf2c:
-	on Microsoft Windows system, link with libf2c.lib;
-	on Linux or Unix systems, link with .../path/to/libf2c.a -lm
-	or, if you install libf2c.a in a standard place, with -lf2c -lm
-	-- in that order, at the end of the command line, as in
-		cc *.o -lf2c -lm
-	Source for libf2c is in /netlib/f2c/libf2c.zip, e.g.,
+    on Microsoft Windows system, link with libf2c.lib;
+    on Linux or Unix systems, link with .../path/to/libf2c.a -lm
+    or, if you install libf2c.a in a standard place, with -lf2c -lm
+    -- in that order, at the end of the command line, as in
+        cc *.o -lf2c -lm
+    Source for libf2c is in /netlib/f2c/libf2c.zip, e.g.,
 
-		http://www.netlib.org/f2c/libf2c.zip
+        http://www.netlib.org/f2c/libf2c.zip
 */
 /* Subroutine */
 #[no_mangle]
-pub unsafe extern "C" fn f2c_dtrmv(mut uplo: *mut libc::c_char,
-                                   mut trans: *mut libc::c_char,
-                                   mut diag: *mut libc::c_char,
-                                   mut n: *mut integer,
-                                   mut a: *mut doublereal,
-                                   mut lda: *mut integer,
-                                   mut x: *mut doublereal,
-                                   mut incx: *mut integer) -> libc::c_int {
+pub unsafe extern "C" fn f2c_dtrmv(
+    mut uplo: *mut libc::c_char,
+    mut trans: *mut libc::c_char,
+    mut diag: *mut libc::c_char,
+    mut n: *mut integer,
+    mut a: *mut doublereal,
+    mut lda: *mut integer,
+    mut x: *mut doublereal,
+    mut incx: *mut integer,
+) -> libc::c_int {
     /* System generated locals */
     let mut a_dim1: integer = 0;
     let mut a_offset: integer = 0;
@@ -50,83 +52,83 @@ pub unsafe extern "C" fn f2c_dtrmv(mut uplo: *mut libc::c_char,
     }
     let mut nounit: logical = 0;
     /*     .. Scalar Arguments .. */
-/*     .. */
-/*     .. Array Arguments .. */
-/*     .. */
+    /*     .. */
+    /*     .. Array Arguments .. */
+    /*     .. */
     /*  Purpose */
-/*  ======= */
+    /*  ======= */
     /*  DTRMV  performs one of the matrix-vector operations */
     /*     x := A*x,   or   x := A'*x, */
     /*  where x is an n element vector and  A is an n by n unit, or non-unit, */
-/*  upper or lower triangular matrix. */
+    /*  upper or lower triangular matrix. */
     /*  Arguments */
-/*  ========== */
+    /*  ========== */
     /*  UPLO   - CHARACTER*1. */
-/*           On entry, UPLO specifies whether the matrix is an upper or */
-/*           lower triangular matrix as follows: */
+    /*           On entry, UPLO specifies whether the matrix is an upper or */
+    /*           lower triangular matrix as follows: */
     /*              UPLO = 'U' or 'u'   A is an upper triangular matrix. */
     /*              UPLO = 'L' or 'l'   A is a lower triangular matrix. */
     /*           Unchanged on exit. */
     /*  TRANS  - CHARACTER*1. */
-/*           On entry, TRANS specifies the operation to be performed as */
-/*           follows: */
+    /*           On entry, TRANS specifies the operation to be performed as */
+    /*           follows: */
     /*              TRANS = 'N' or 'n'   x := A*x. */
     /*              TRANS = 'T' or 't'   x := A'*x. */
     /*              TRANS = 'C' or 'c'   x := A'*x. */
     /*           Unchanged on exit. */
     /*  DIAG   - CHARACTER*1. */
-/*           On entry, DIAG specifies whether or not A is unit */
-/*           triangular as follows: */
+    /*           On entry, DIAG specifies whether or not A is unit */
+    /*           triangular as follows: */
     /*              DIAG = 'U' or 'u'   A is assumed to be unit triangular. */
     /*              DIAG = 'N' or 'n'   A is not assumed to be unit */
-/*                                  triangular. */
+    /*                                  triangular. */
     /*           Unchanged on exit. */
     /*  N      - INTEGER. */
-/*           On entry, N specifies the order of the matrix A. */
-/*           N must be at least zero. */
-/*           Unchanged on exit. */
+    /*           On entry, N specifies the order of the matrix A. */
+    /*           N must be at least zero. */
+    /*           Unchanged on exit. */
     /*  A      - DOUBLE PRECISION array of DIMENSION ( LDA, n ). */
-/*           Before entry with  UPLO = 'U' or 'u', the leading n by n */
-/*           upper triangular part of the array A must contain the upper */
-/*           triangular matrix and the strictly lower triangular part of */
-/*           A is not referenced. */
-/*           Before entry with UPLO = 'L' or 'l', the leading n by n */
-/*           lower triangular part of the array A must contain the lower */
-/*           triangular matrix and the strictly upper triangular part of */
-/*           A is not referenced. */
-/*           Note that when  DIAG = 'U' or 'u', the diagonal elements of */
-/*           A are not referenced either, but are assumed to be unity. */
-/*           Unchanged on exit. */
+    /*           Before entry with  UPLO = 'U' or 'u', the leading n by n */
+    /*           upper triangular part of the array A must contain the upper */
+    /*           triangular matrix and the strictly lower triangular part of */
+    /*           A is not referenced. */
+    /*           Before entry with UPLO = 'L' or 'l', the leading n by n */
+    /*           lower triangular part of the array A must contain the lower */
+    /*           triangular matrix and the strictly upper triangular part of */
+    /*           A is not referenced. */
+    /*           Note that when  DIAG = 'U' or 'u', the diagonal elements of */
+    /*           A are not referenced either, but are assumed to be unity. */
+    /*           Unchanged on exit. */
     /*  LDA    - INTEGER. */
-/*           On entry, LDA specifies the first dimension of A as declared */
-/*           in the calling (sub) program. LDA must be at least */
-/*           max( 1, n ). */
-/*           Unchanged on exit. */
+    /*           On entry, LDA specifies the first dimension of A as declared */
+    /*           in the calling (sub) program. LDA must be at least */
+    /*           max( 1, n ). */
+    /*           Unchanged on exit. */
     /*  X      - DOUBLE PRECISION array of dimension at least */
-/*           ( 1 + ( n - 1 )*abs( INCX ) ). */
-/*           Before entry, the incremented array X must contain the n */
-/*           element vector x. On exit, X is overwritten with the */
-/*           tranformed vector x. */
+    /*           ( 1 + ( n - 1 )*abs( INCX ) ). */
+    /*           Before entry, the incremented array X must contain the n */
+    /*           element vector x. On exit, X is overwritten with the */
+    /*           tranformed vector x. */
     /*  INCX   - INTEGER. */
-/*           On entry, INCX specifies the increment for the elements of */
-/*           X. INCX must not be zero. */
-/*           Unchanged on exit. */
+    /*           On entry, INCX specifies the increment for the elements of */
+    /*           X. INCX must not be zero. */
+    /*           Unchanged on exit. */
     /*  Level 2 Blas routine. */
     /*  -- Written on 22-October-1986. */
-/*     Jack Dongarra, Argonne National Lab. */
-/*     Jeremy Du Croz, Nag Central Office. */
-/*     Sven Hammarling, Nag Central Office. */
-/*     Richard Hanson, Sandia National Labs. */
+    /*     Jack Dongarra, Argonne National Lab. */
+    /*     Jeremy Du Croz, Nag Central Office. */
+    /*     Sven Hammarling, Nag Central Office. */
+    /*     Richard Hanson, Sandia National Labs. */
     /*     .. Parameters .. */
-/*     .. */
-/*     .. Local Scalars .. */
-/*     .. */
-/*     .. External Functions .. */
-/*     .. */
-/*     .. External Subroutines .. */
-/*     .. */
-/*     .. Intrinsic Functions .. */
-/*     .. */
+    /*     .. */
+    /*     .. Local Scalars .. */
+    /*     .. */
+    /*     .. External Functions .. */
+    /*     .. */
+    /*     .. External Subroutines .. */
+    /*     .. */
+    /*     .. Intrinsic Functions .. */
+    /*     .. */
     /*     Test the input parameters. */
     /* Parameter adjustments */
     a_dim1 = *lda;
@@ -135,69 +137,88 @@ pub unsafe extern "C" fn f2c_dtrmv(mut uplo: *mut libc::c_char,
     x = x.offset(-1);
     /* Function Body */
     info = 0 as libc::c_int as integer;
-    if lsame__0(uplo,
-                b"U\x00" as *const u8 as *const libc::c_char as
-                    *mut libc::c_char) == 0 &&
-           lsame__0(uplo,
-                    b"L\x00" as *const u8 as *const libc::c_char as
-                        *mut libc::c_char) == 0 {
+    if lsame__0(
+        uplo,
+        b"U\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+    ) == 0
+        && lsame__0(
+            uplo,
+            b"L\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+        ) == 0
+    {
         info = 1 as libc::c_int as integer
-    } else if lsame__0(trans,
-                       b"N\x00" as *const u8 as *const libc::c_char as
-                           *mut libc::c_char) == 0 &&
-                  lsame__0(trans,
-                           b"T\x00" as *const u8 as *const libc::c_char as
-                               *mut libc::c_char) == 0 &&
-                  lsame__0(trans,
-                           b"C\x00" as *const u8 as *const libc::c_char as
-                               *mut libc::c_char) == 0 {
+    } else if lsame__0(
+        trans,
+        b"N\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+    ) == 0
+        && lsame__0(
+            trans,
+            b"T\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+        ) == 0
+        && lsame__0(
+            trans,
+            b"C\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+        ) == 0
+    {
         info = 2 as libc::c_int as integer
-    } else if lsame__0(diag,
-                       b"U\x00" as *const u8 as *const libc::c_char as
-                           *mut libc::c_char) == 0 &&
-                  lsame__0(diag,
-                           b"N\x00" as *const u8 as *const libc::c_char as
-                               *mut libc::c_char) == 0 {
+    } else if lsame__0(
+        diag,
+        b"U\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+    ) == 0
+        && lsame__0(
+            diag,
+            b"N\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+        ) == 0
+    {
         info = 3 as libc::c_int as integer
     } else if *n < 0 as libc::c_int as libc::c_long {
         info = 4 as libc::c_int as integer
-    } else if *lda <
-                  (if 1 as libc::c_int as libc::c_long >= *n {
-                       1 as libc::c_int as libc::c_long
-                   } else { *n }) {
+    } else if *lda
+        < (if 1 as libc::c_int as libc::c_long >= *n {
+            1 as libc::c_int as libc::c_long
+        } else {
+            *n
+        })
+    {
         info = 6 as libc::c_int as integer
     } else if *incx == 0 as libc::c_int as libc::c_long {
         info = 8 as libc::c_int as integer
     }
     if info != 0 as libc::c_int as libc::c_long {
-        xerbla__0(b"DTRMV \x00" as *const u8 as *const libc::c_char as
-                      *mut libc::c_char, &mut info);
-        return 0 as libc::c_int
+        xerbla__0(
+            b"DTRMV \x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+            &mut info,
+        );
+        return 0 as libc::c_int;
     }
     /*     Quick return if possible. */
-    if *n == 0 as libc::c_int as libc::c_long { return 0 as libc::c_int }
-    nounit =
-        lsame__0(diag,
-                 b"N\x00" as *const u8 as *const libc::c_char as
-                     *mut libc::c_char);
+    if *n == 0 as libc::c_int as libc::c_long {
+        return 0 as libc::c_int;
+    }
+    nounit = lsame__0(
+        diag,
+        b"N\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+    );
     /*     Set up the start point in X if the increment is not unity. This */
-/*     will be  ( N - 1 )*INCX  too small for descending loops. */
+    /*     will be  ( N - 1 )*INCX  too small for descending loops. */
     if *incx <= 0 as libc::c_int as libc::c_long {
-        kx =
-            1 as libc::c_int as libc::c_long -
-                (*n - 1 as libc::c_int as libc::c_long) * *incx
+        kx = 1 as libc::c_int as libc::c_long - (*n - 1 as libc::c_int as libc::c_long) * *incx
     } else if *incx != 1 as libc::c_int as libc::c_long {
         kx = 1 as libc::c_int as integer
     }
     /*     Start the operations. In this version the elements of A are */
-/*     accessed sequentially with one pass through A. */
-    if lsame__0(trans,
-                b"N\x00" as *const u8 as *const libc::c_char as
-                    *mut libc::c_char) != 0 {
+    /*     accessed sequentially with one pass through A. */
+    if lsame__0(
+        trans,
+        b"N\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+    ) != 0
+    {
         /*        Form  x := A*x. */
-        if lsame__0(uplo,
-                    b"U\x00" as *const u8 as *const libc::c_char as
-                        *mut libc::c_char) != 0 {
+        if lsame__0(
+            uplo,
+            b"U\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+        ) != 0
+        {
             if *incx == 1 as libc::c_int as libc::c_long {
                 i__1 = *n;
                 j = 1 as libc::c_int as integer;
@@ -208,8 +229,7 @@ pub unsafe extern "C" fn f2c_dtrmv(mut uplo: *mut libc::c_char,
                         i__ = 1 as libc::c_int as integer;
                         while i__ <= i__2 {
                             let ref mut fresh0 = *x.offset(i__ as isize);
-                            *fresh0 +=
-                                temp * *a.offset((i__ + j * a_dim1) as isize);
+                            *fresh0 += temp * *a.offset((i__ + j * a_dim1) as isize);
                             i__ += 1
                             /* L10: */
                         }
@@ -233,8 +253,7 @@ pub unsafe extern "C" fn f2c_dtrmv(mut uplo: *mut libc::c_char,
                         i__ = 1 as libc::c_int as integer;
                         while i__ <= i__2 {
                             let ref mut fresh2 = *x.offset(ix as isize);
-                            *fresh2 +=
-                                temp * *a.offset((i__ + j * a_dim1) as isize);
+                            *fresh2 += temp * *a.offset((i__ + j * a_dim1) as isize);
                             ix += *incx;
                             i__ += 1
                             /* L30: */
@@ -258,8 +277,7 @@ pub unsafe extern "C" fn f2c_dtrmv(mut uplo: *mut libc::c_char,
                     i__ = *n;
                     while i__ >= i__1 {
                         let ref mut fresh4 = *x.offset(i__ as isize);
-                        *fresh4 +=
-                            temp * *a.offset((i__ + j * a_dim1) as isize);
+                        *fresh4 += temp * *a.offset((i__ + j * a_dim1) as isize);
                         i__ -= 1
                         /* L50: */
                     }
@@ -283,8 +301,7 @@ pub unsafe extern "C" fn f2c_dtrmv(mut uplo: *mut libc::c_char,
                     i__ = *n;
                     while i__ >= i__1 {
                         let ref mut fresh6 = *x.offset(ix as isize);
-                        *fresh6 +=
-                            temp * *a.offset((i__ + j * a_dim1) as isize);
+                        *fresh6 += temp * *a.offset((i__ + j * a_dim1) as isize);
                         ix -= *incx;
                         i__ -= 1
                         /* L70: */
@@ -299,9 +316,11 @@ pub unsafe extern "C" fn f2c_dtrmv(mut uplo: *mut libc::c_char,
                 /* L80: */
             }
         }
-    } else if lsame__0(uplo,
-                       b"U\x00" as *const u8 as *const libc::c_char as
-                           *mut libc::c_char) != 0 {
+    } else if lsame__0(
+        uplo,
+        b"U\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+    ) != 0
+    {
         if *incx == 1 as libc::c_int as libc::c_long {
             j = *n;
             while j >= 1 as libc::c_int as libc::c_long {
@@ -311,9 +330,7 @@ pub unsafe extern "C" fn f2c_dtrmv(mut uplo: *mut libc::c_char,
                 }
                 i__ = j - 1 as libc::c_int as libc::c_long;
                 while i__ >= 1 as libc::c_int as libc::c_long {
-                    temp +=
-                        *a.offset((i__ + j * a_dim1) as isize) *
-                            *x.offset(i__ as isize);
+                    temp += *a.offset((i__ + j * a_dim1) as isize) * *x.offset(i__ as isize);
                     i__ -= 1
                     /*        Form  x := A'*x. */
                     /* L100: */
@@ -334,9 +351,7 @@ pub unsafe extern "C" fn f2c_dtrmv(mut uplo: *mut libc::c_char,
                 i__ = j - 1 as libc::c_int as libc::c_long;
                 while i__ >= 1 as libc::c_int as libc::c_long {
                     ix -= *incx;
-                    temp +=
-                        *a.offset((i__ + j * a_dim1) as isize) *
-                            *x.offset(ix as isize);
+                    temp += *a.offset((i__ + j * a_dim1) as isize) * *x.offset(ix as isize);
                     i__ -= 1
                     /* L120: */
                     /* L110: */
@@ -351,13 +366,13 @@ pub unsafe extern "C" fn f2c_dtrmv(mut uplo: *mut libc::c_char,
         j = 1 as libc::c_int as integer;
         while j <= i__1 {
             temp = *x.offset(j as isize);
-            if nounit != 0 { temp *= *a.offset((j + j * a_dim1) as isize) }
+            if nounit != 0 {
+                temp *= *a.offset((j + j * a_dim1) as isize)
+            }
             i__2 = *n;
             i__ = j + 1 as libc::c_int as libc::c_long;
             while i__ <= i__2 {
-                temp +=
-                    *a.offset((i__ + j * a_dim1) as isize) *
-                        *x.offset(i__ as isize);
+                temp += *a.offset((i__ + j * a_dim1) as isize) * *x.offset(i__ as isize);
                 i__ += 1
                 /* L140: */
                 /* L130: */
@@ -372,14 +387,14 @@ pub unsafe extern "C" fn f2c_dtrmv(mut uplo: *mut libc::c_char,
         while j <= i__1 {
             temp = *x.offset(jx as isize);
             ix = jx;
-            if nounit != 0 { temp *= *a.offset((j + j * a_dim1) as isize) }
+            if nounit != 0 {
+                temp *= *a.offset((j + j * a_dim1) as isize)
+            }
             i__2 = *n;
             i__ = j + 1 as libc::c_int as libc::c_long;
             while i__ <= i__2 {
                 ix += *incx;
-                temp +=
-                    *a.offset((i__ + j * a_dim1) as isize) *
-                        *x.offset(ix as isize);
+                temp += *a.offset((i__ + j * a_dim1) as isize) * *x.offset(ix as isize);
                 i__ += 1
                 /* L160: */
                 /* L150: */

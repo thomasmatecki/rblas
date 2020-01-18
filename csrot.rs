@@ -1,8 +1,8 @@
-use ::libc;
+use libc;
 /* f2c.h  --  Standard Fortran to C header file */
 /* *  barf  [ba:rf]  2.  "He suggested using FORTRAN, and everybody barfed."
 
-	- From The Shogakukan DICTIONARY OF NEW ENGLISH (Second edition) */
+- From The Shogakukan DICTIONARY OF NEW ENGLISH (Second edition) */
 pub type integer = libc::c_long;
 pub type real = libc::c_float;
 #[derive(Copy, Clone)]
@@ -13,84 +13,90 @@ pub struct complex {
 }
 /* csrot.f -- translated by f2c (version 20061008).
    You must link the resulting object file with libf2c:
-	on Microsoft Windows system, link with libf2c.lib;
-	on Linux or Unix systems, link with .../path/to/libf2c.a -lm
-	or, if you install libf2c.a in a standard place, with -lf2c -lm
-	-- in that order, at the end of the command line, as in
-		cc *.o -lf2c -lm
-	Source for libf2c is in /netlib/f2c/libf2c.zip, e.g.,
+    on Microsoft Windows system, link with libf2c.lib;
+    on Linux or Unix systems, link with .../path/to/libf2c.a -lm
+    or, if you install libf2c.a in a standard place, with -lf2c -lm
+    -- in that order, at the end of the command line, as in
+        cc *.o -lf2c -lm
+    Source for libf2c is in /netlib/f2c/libf2c.zip, e.g.,
 
-		http://www.netlib.org/f2c/libf2c.zip
+        http://www.netlib.org/f2c/libf2c.zip
 */
 /* Subroutine */
 #[no_mangle]
-pub unsafe extern "C" fn csrot_(mut n: *mut integer, mut cx: *mut complex,
-                                mut incx: *mut integer, mut cy: *mut complex,
-                                mut incy: *mut integer, mut c__: *mut real,
-                                mut s: *mut real) -> libc::c_int {
+pub unsafe extern "C" fn csrot_(
+    mut n: *mut integer,
+    mut cx: *mut complex,
+    mut incx: *mut integer,
+    mut cy: *mut complex,
+    mut incy: *mut integer,
+    mut c__: *mut real,
+    mut s: *mut real,
+) -> libc::c_int {
     /* System generated locals */
     let mut i__1: integer = 0;
     let mut i__2: integer = 0;
     let mut i__3: integer = 0;
     let mut i__4: integer = 0;
-    let mut q__1: complex = complex{r: 0., i: 0.,};
-    let mut q__2: complex = complex{r: 0., i: 0.,};
-    let mut q__3: complex = complex{r: 0., i: 0.,};
+    let mut q__1: complex = complex { r: 0., i: 0. };
+    let mut q__2: complex = complex { r: 0., i: 0. };
+    let mut q__3: complex = complex { r: 0., i: 0. };
     /* Local variables */
     let mut i__: integer = 0;
     let mut ix: integer = 0;
     let mut iy: integer = 0;
-    let mut ctemp: complex = complex{r: 0., i: 0.,};
+    let mut ctemp: complex = complex { r: 0., i: 0. };
     /*     .. Scalar Arguments .. */
-/*     .. */
-/*     .. Array Arguments .. */
-/*     .. */
+    /*     .. */
+    /*     .. Array Arguments .. */
+    /*     .. */
     /*  Purpose */
-/*  ======= */
+    /*  ======= */
     /*  Applies a plane rotation, where the cos and sin (c and s) are real */
-/*  and the vectors cx and cy are complex. */
-/*  jack dongarra, linpack, 3/11/78. */
+    /*  and the vectors cx and cy are complex. */
+    /*  jack dongarra, linpack, 3/11/78. */
     /*  Arguments */
-/*  ========== */
+    /*  ========== */
     /*  N        (input) INTEGER */
-/*           On entry, N specifies the order of the vectors cx and cy. */
-/*           N must be at least zero. */
-/*           Unchanged on exit. */
+    /*           On entry, N specifies the order of the vectors cx and cy. */
+    /*           N must be at least zero. */
+    /*           Unchanged on exit. */
     /*  CX       (input) COMPLEX array, dimension at least */
-/*           ( 1 + ( N - 1 )*abs( INCX ) ). */
-/*           Before entry, the incremented array CX must contain the n */
-/*           element vector cx. On exit, CX is overwritten by the updated */
-/*           vector cx. */
+    /*           ( 1 + ( N - 1 )*abs( INCX ) ). */
+    /*           Before entry, the incremented array CX must contain the n */
+    /*           element vector cx. On exit, CX is overwritten by the updated */
+    /*           vector cx. */
     /*  INCX     (input) INTEGER */
-/*           On entry, INCX specifies the increment for the elements of */
-/*           CX. INCX must not be zero. */
-/*           Unchanged on exit. */
+    /*           On entry, INCX specifies the increment for the elements of */
+    /*           CX. INCX must not be zero. */
+    /*           Unchanged on exit. */
     /*  CY       (input) COMPLEX array, dimension at least */
-/*           ( 1 + ( N - 1 )*abs( INCY ) ). */
-/*           Before entry, the incremented array CY must contain the n */
-/*           element vector cy. On exit, CY is overwritten by the updated */
-/*           vector cy. */
+    /*           ( 1 + ( N - 1 )*abs( INCY ) ). */
+    /*           Before entry, the incremented array CY must contain the n */
+    /*           element vector cy. On exit, CY is overwritten by the updated */
+    /*           vector cy. */
     /*  INCY     (input) INTEGER */
-/*           On entry, INCY specifies the increment for the elements of */
-/*           CY. INCY must not be zero. */
-/*           Unchanged on exit. */
+    /*           On entry, INCY specifies the increment for the elements of */
+    /*           CY. INCY must not be zero. */
+    /*           Unchanged on exit. */
     /*  C        (input) REAL */
-/*           On entry, C specifies the cosine, cos. */
-/*           Unchanged on exit. */
+    /*           On entry, C specifies the cosine, cos. */
+    /*           Unchanged on exit. */
     /*  S        (input) REAL */
-/*           On entry, S specifies the sine, sin. */
-/*           Unchanged on exit. */
+    /*           On entry, S specifies the sine, sin. */
+    /*           Unchanged on exit. */
     /*  ===================================================================== */
     /*     .. Local Scalars .. */
-/*     .. */
-/*     .. Executable Statements .. */
+    /*     .. */
+    /*     .. Executable Statements .. */
     /* Parameter adjustments */
     cy = cy.offset(-1);
     cx = cx.offset(-1);
     /* Function Body */
-    if *n <= 0 as libc::c_int as libc::c_long { return 0 as libc::c_int }
-    if *incx == 1 as libc::c_int as libc::c_long &&
-           *incy == 1 as libc::c_int as libc::c_long {
+    if *n <= 0 as libc::c_int as libc::c_long {
+        return 0 as libc::c_int;
+    }
+    if *incx == 1 as libc::c_int as libc::c_long && *incy == 1 as libc::c_int as libc::c_long {
         /*        code for both increments equal to 1 */
         i__1 = *n;
         i__ = 1 as libc::c_int as integer;
@@ -122,21 +128,17 @@ pub unsafe extern "C" fn csrot_(mut n: *mut integer, mut cx: *mut complex,
             i__ += 1
             /* L30: */
         }
-        return 0 as libc::c_int
+        return 0 as libc::c_int;
     } else {
         /*        code for unequal increments or equal increments not equal */
-/*          to 1 */
+        /*          to 1 */
         ix = 1 as libc::c_int as integer;
         iy = 1 as libc::c_int as integer;
         if *incx < 0 as libc::c_int as libc::c_long {
-            ix =
-                (-*n + 1 as libc::c_int as libc::c_long) * *incx +
-                    1 as libc::c_int as libc::c_long
+            ix = (-*n + 1 as libc::c_int as libc::c_long) * *incx + 1 as libc::c_int as libc::c_long
         }
         if *incy < 0 as libc::c_int as libc::c_long {
-            iy =
-                (-*n + 1 as libc::c_int as libc::c_long) * *incy +
-                    1 as libc::c_int as libc::c_long
+            iy = (-*n + 1 as libc::c_int as libc::c_long) * *incy + 1 as libc::c_int as libc::c_long
         }
         i__1 = *n;
         i__ = 1 as libc::c_int as integer;
@@ -170,7 +172,7 @@ pub unsafe extern "C" fn csrot_(mut n: *mut integer, mut cx: *mut complex,
             i__ += 1
             /* L10: */
         }
-        return 0 as libc::c_int
+        return 0 as libc::c_int;
     };
 }
 /* csrot_ */

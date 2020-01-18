@@ -1,8 +1,8 @@
-use ::libc;
+use libc;
 /* f2c.h  --  Standard Fortran to C header file */
 /* *  barf  [ba:rf]  2.  "He suggested using FORTRAN, and everybody barfed."
 
-	- From The Shogakukan DICTIONARY OF NEW ENGLISH (Second edition) */
+- From The Shogakukan DICTIONARY OF NEW ENGLISH (Second edition) */
 pub type integer = libc::c_long;
 pub type doublereal = libc::c_double;
 #[derive(Copy, Clone)]
@@ -14,25 +14,27 @@ pub struct doublecomplex {
 pub type logical = libc::c_long;
 /* ztrmv.f -- translated by f2c (version 20061008).
    You must link the resulting object file with libf2c:
-	on Microsoft Windows system, link with libf2c.lib;
-	on Linux or Unix systems, link with .../path/to/libf2c.a -lm
-	or, if you install libf2c.a in a standard place, with -lf2c -lm
-	-- in that order, at the end of the command line, as in
-		cc *.o -lf2c -lm
-	Source for libf2c is in /netlib/f2c/libf2c.zip, e.g.,
+    on Microsoft Windows system, link with libf2c.lib;
+    on Linux or Unix systems, link with .../path/to/libf2c.a -lm
+    or, if you install libf2c.a in a standard place, with -lf2c -lm
+    -- in that order, at the end of the command line, as in
+        cc *.o -lf2c -lm
+    Source for libf2c is in /netlib/f2c/libf2c.zip, e.g.,
 
-		http://www.netlib.org/f2c/libf2c.zip
+        http://www.netlib.org/f2c/libf2c.zip
 */
 /* Subroutine */
 #[no_mangle]
-pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
-                                   mut trans: *mut libc::c_char,
-                                   mut diag: *mut libc::c_char,
-                                   mut n: *mut integer,
-                                   mut a: *mut doublecomplex,
-                                   mut lda: *mut integer,
-                                   mut x: *mut doublecomplex,
-                                   mut incx: *mut integer) -> libc::c_int {
+pub unsafe extern "C" fn f2c_ztrmv(
+    mut uplo: *mut libc::c_char,
+    mut trans: *mut libc::c_char,
+    mut diag: *mut libc::c_char,
+    mut n: *mut integer,
+    mut a: *mut doublecomplex,
+    mut lda: *mut integer,
+    mut x: *mut doublecomplex,
+    mut incx: *mut integer,
+) -> libc::c_int {
     /* System generated locals */
     let mut a_dim1: integer = 0;
     let mut a_offset: integer = 0;
@@ -41,9 +43,9 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
     let mut i__3: integer = 0;
     let mut i__4: integer = 0;
     let mut i__5: integer = 0;
-    let mut z__1: doublecomplex = doublecomplex{r: 0., i: 0.,};
-    let mut z__2: doublecomplex = doublecomplex{r: 0., i: 0.,};
-    let mut z__3: doublecomplex = doublecomplex{r: 0., i: 0.,};
+    let mut z__1: doublecomplex = doublecomplex { r: 0., i: 0. };
+    let mut z__2: doublecomplex = doublecomplex { r: 0., i: 0. };
+    let mut z__3: doublecomplex = doublecomplex { r: 0., i: 0. };
     /* Builtin functions */
     extern "C" {
         #[link_name = "d_cnjg"]
@@ -56,7 +58,7 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
     let mut jx: integer = 0;
     let mut kx: integer = 0;
     let mut info: integer = 0;
-    let mut temp: doublecomplex = doublecomplex{r: 0., i: 0.,};
+    let mut temp: doublecomplex = doublecomplex { r: 0., i: 0. };
     extern "C" {
         #[link_name = "lsame_"]
         fn lsame__0(_: *mut libc::c_char, _: *mut libc::c_char) -> logical;
@@ -68,83 +70,83 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
     let mut noconj: logical = 0;
     let mut nounit: logical = 0;
     /*     .. Scalar Arguments .. */
-/*     .. */
-/*     .. Array Arguments .. */
-/*     .. */
+    /*     .. */
+    /*     .. Array Arguments .. */
+    /*     .. */
     /*  Purpose */
-/*  ======= */
+    /*  ======= */
     /*  ZTRMV  performs one of the matrix-vector operations */
     /*     x := A*x,   or   x := A'*x,   or   x := conjg( A' )*x, */
     /*  where x is an n element vector and  A is an n by n unit, or non-unit, */
-/*  upper or lower triangular matrix. */
+    /*  upper or lower triangular matrix. */
     /*  Arguments */
-/*  ========== */
+    /*  ========== */
     /*  UPLO   - CHARACTER*1. */
-/*           On entry, UPLO specifies whether the matrix is an upper or */
-/*           lower triangular matrix as follows: */
+    /*           On entry, UPLO specifies whether the matrix is an upper or */
+    /*           lower triangular matrix as follows: */
     /*              UPLO = 'U' or 'u'   A is an upper triangular matrix. */
     /*              UPLO = 'L' or 'l'   A is a lower triangular matrix. */
     /*           Unchanged on exit. */
     /*  TRANS  - CHARACTER*1. */
-/*           On entry, TRANS specifies the operation to be performed as */
-/*           follows: */
+    /*           On entry, TRANS specifies the operation to be performed as */
+    /*           follows: */
     /*              TRANS = 'N' or 'n'   x := A*x. */
     /*              TRANS = 'T' or 't'   x := A'*x. */
     /*              TRANS = 'C' or 'c'   x := conjg( A' )*x. */
     /*           Unchanged on exit. */
     /*  DIAG   - CHARACTER*1. */
-/*           On entry, DIAG specifies whether or not A is unit */
-/*           triangular as follows: */
+    /*           On entry, DIAG specifies whether or not A is unit */
+    /*           triangular as follows: */
     /*              DIAG = 'U' or 'u'   A is assumed to be unit triangular. */
     /*              DIAG = 'N' or 'n'   A is not assumed to be unit */
-/*                                  triangular. */
+    /*                                  triangular. */
     /*           Unchanged on exit. */
     /*  N      - INTEGER. */
-/*           On entry, N specifies the order of the matrix A. */
-/*           N must be at least zero. */
-/*           Unchanged on exit. */
+    /*           On entry, N specifies the order of the matrix A. */
+    /*           N must be at least zero. */
+    /*           Unchanged on exit. */
     /*  A      - COMPLEX*16       array of DIMENSION ( LDA, n ). */
-/*           Before entry with  UPLO = 'U' or 'u', the leading n by n */
-/*           upper triangular part of the array A must contain the upper */
-/*           triangular matrix and the strictly lower triangular part of */
-/*           A is not referenced. */
-/*           Before entry with UPLO = 'L' or 'l', the leading n by n */
-/*           lower triangular part of the array A must contain the lower */
-/*           triangular matrix and the strictly upper triangular part of */
-/*           A is not referenced. */
-/*           Note that when  DIAG = 'U' or 'u', the diagonal elements of */
-/*           A are not referenced either, but are assumed to be unity. */
-/*           Unchanged on exit. */
+    /*           Before entry with  UPLO = 'U' or 'u', the leading n by n */
+    /*           upper triangular part of the array A must contain the upper */
+    /*           triangular matrix and the strictly lower triangular part of */
+    /*           A is not referenced. */
+    /*           Before entry with UPLO = 'L' or 'l', the leading n by n */
+    /*           lower triangular part of the array A must contain the lower */
+    /*           triangular matrix and the strictly upper triangular part of */
+    /*           A is not referenced. */
+    /*           Note that when  DIAG = 'U' or 'u', the diagonal elements of */
+    /*           A are not referenced either, but are assumed to be unity. */
+    /*           Unchanged on exit. */
     /*  LDA    - INTEGER. */
-/*           On entry, LDA specifies the first dimension of A as declared */
-/*           in the calling (sub) program. LDA must be at least */
-/*           max( 1, n ). */
-/*           Unchanged on exit. */
+    /*           On entry, LDA specifies the first dimension of A as declared */
+    /*           in the calling (sub) program. LDA must be at least */
+    /*           max( 1, n ). */
+    /*           Unchanged on exit. */
     /*  X      - COMPLEX*16       array of dimension at least */
-/*           ( 1 + ( n - 1 )*abs( INCX ) ). */
-/*           Before entry, the incremented array X must contain the n */
-/*           element vector x. On exit, X is overwritten with the */
-/*           tranformed vector x. */
+    /*           ( 1 + ( n - 1 )*abs( INCX ) ). */
+    /*           Before entry, the incremented array X must contain the n */
+    /*           element vector x. On exit, X is overwritten with the */
+    /*           tranformed vector x. */
     /*  INCX   - INTEGER. */
-/*           On entry, INCX specifies the increment for the elements of */
-/*           X. INCX must not be zero. */
-/*           Unchanged on exit. */
+    /*           On entry, INCX specifies the increment for the elements of */
+    /*           X. INCX must not be zero. */
+    /*           Unchanged on exit. */
     /*  Level 2 Blas routine. */
     /*  -- Written on 22-October-1986. */
-/*     Jack Dongarra, Argonne National Lab. */
-/*     Jeremy Du Croz, Nag Central Office. */
-/*     Sven Hammarling, Nag Central Office. */
-/*     Richard Hanson, Sandia National Labs. */
+    /*     Jack Dongarra, Argonne National Lab. */
+    /*     Jeremy Du Croz, Nag Central Office. */
+    /*     Sven Hammarling, Nag Central Office. */
+    /*     Richard Hanson, Sandia National Labs. */
     /*     .. Parameters .. */
-/*     .. */
-/*     .. Local Scalars .. */
-/*     .. */
-/*     .. External Functions .. */
-/*     .. */
-/*     .. External Subroutines .. */
-/*     .. */
-/*     .. Intrinsic Functions .. */
-/*     .. */
+    /*     .. */
+    /*     .. Local Scalars .. */
+    /*     .. */
+    /*     .. External Functions .. */
+    /*     .. */
+    /*     .. External Subroutines .. */
+    /*     .. */
+    /*     .. Intrinsic Functions .. */
+    /*     .. */
     /*     Test the input parameters. */
     /* Parameter adjustments */
     a_dim1 = *lda;
@@ -153,80 +155,100 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
     x = x.offset(-1);
     /* Function Body */
     info = 0 as libc::c_int as integer;
-    if lsame__0(uplo,
-                b"U\x00" as *const u8 as *const libc::c_char as
-                    *mut libc::c_char) == 0 &&
-           lsame__0(uplo,
-                    b"L\x00" as *const u8 as *const libc::c_char as
-                        *mut libc::c_char) == 0 {
+    if lsame__0(
+        uplo,
+        b"U\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+    ) == 0
+        && lsame__0(
+            uplo,
+            b"L\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+        ) == 0
+    {
         info = 1 as libc::c_int as integer
-    } else if lsame__0(trans,
-                       b"N\x00" as *const u8 as *const libc::c_char as
-                           *mut libc::c_char) == 0 &&
-                  lsame__0(trans,
-                           b"T\x00" as *const u8 as *const libc::c_char as
-                               *mut libc::c_char) == 0 &&
-                  lsame__0(trans,
-                           b"C\x00" as *const u8 as *const libc::c_char as
-                               *mut libc::c_char) == 0 {
+    } else if lsame__0(
+        trans,
+        b"N\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+    ) == 0
+        && lsame__0(
+            trans,
+            b"T\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+        ) == 0
+        && lsame__0(
+            trans,
+            b"C\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+        ) == 0
+    {
         info = 2 as libc::c_int as integer
-    } else if lsame__0(diag,
-                       b"U\x00" as *const u8 as *const libc::c_char as
-                           *mut libc::c_char) == 0 &&
-                  lsame__0(diag,
-                           b"N\x00" as *const u8 as *const libc::c_char as
-                               *mut libc::c_char) == 0 {
+    } else if lsame__0(
+        diag,
+        b"U\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+    ) == 0
+        && lsame__0(
+            diag,
+            b"N\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+        ) == 0
+    {
         info = 3 as libc::c_int as integer
     } else if *n < 0 as libc::c_int as libc::c_long {
         info = 4 as libc::c_int as integer
-    } else if *lda <
-                  (if 1 as libc::c_int as libc::c_long >= *n {
-                       1 as libc::c_int as libc::c_long
-                   } else { *n }) {
+    } else if *lda
+        < (if 1 as libc::c_int as libc::c_long >= *n {
+            1 as libc::c_int as libc::c_long
+        } else {
+            *n
+        })
+    {
         info = 6 as libc::c_int as integer
     } else if *incx == 0 as libc::c_int as libc::c_long {
         info = 8 as libc::c_int as integer
     }
     if info != 0 as libc::c_int as libc::c_long {
-        xerbla__0(b"ZTRMV \x00" as *const u8 as *const libc::c_char as
-                      *mut libc::c_char, &mut info);
-        return 0 as libc::c_int
+        xerbla__0(
+            b"ZTRMV \x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+            &mut info,
+        );
+        return 0 as libc::c_int;
     }
     /*     Quick return if possible. */
-    if *n == 0 as libc::c_int as libc::c_long { return 0 as libc::c_int }
-    noconj =
-        lsame__0(trans,
-                 b"T\x00" as *const u8 as *const libc::c_char as
-                     *mut libc::c_char);
-    nounit =
-        lsame__0(diag,
-                 b"N\x00" as *const u8 as *const libc::c_char as
-                     *mut libc::c_char);
+    if *n == 0 as libc::c_int as libc::c_long {
+        return 0 as libc::c_int;
+    }
+    noconj = lsame__0(
+        trans,
+        b"T\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+    );
+    nounit = lsame__0(
+        diag,
+        b"N\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+    );
     /*     Set up the start point in X if the increment is not unity. This */
-/*     will be  ( N - 1 )*INCX  too small for descending loops. */
+    /*     will be  ( N - 1 )*INCX  too small for descending loops. */
     if *incx <= 0 as libc::c_int as libc::c_long {
-        kx =
-            1 as libc::c_int as libc::c_long -
-                (*n - 1 as libc::c_int as libc::c_long) * *incx
+        kx = 1 as libc::c_int as libc::c_long - (*n - 1 as libc::c_int as libc::c_long) * *incx
     } else if *incx != 1 as libc::c_int as libc::c_long {
         kx = 1 as libc::c_int as integer
     }
     /*     Start the operations. In this version the elements of A are */
-/*     accessed sequentially with one pass through A. */
-    if lsame__0(trans,
-                b"N\x00" as *const u8 as *const libc::c_char as
-                    *mut libc::c_char) != 0 {
+    /*     accessed sequentially with one pass through A. */
+    if lsame__0(
+        trans,
+        b"N\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+    ) != 0
+    {
         /*        Form  x := A*x. */
-        if lsame__0(uplo,
-                    b"U\x00" as *const u8 as *const libc::c_char as
-                        *mut libc::c_char) != 0 {
+        if lsame__0(
+            uplo,
+            b"U\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+        ) != 0
+        {
             if *incx == 1 as libc::c_int as libc::c_long {
                 i__1 = *n;
                 j = 1 as libc::c_int as integer;
                 while j <= i__1 {
                     i__2 = j;
-                    if (*x.offset(i__2 as isize)).r != 0.0f64 ||
-                           (*x.offset(i__2 as isize)).i != 0.0f64 {
+                    if (*x.offset(i__2 as isize)).r != 0.0f64
+                        || (*x.offset(i__2 as isize)).i != 0.0f64
+                    {
                         i__2 = j;
                         temp.r = (*x.offset(i__2 as isize)).r;
                         temp.i = (*x.offset(i__2 as isize)).i;
@@ -236,12 +258,10 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
                             i__3 = i__;
                             i__4 = i__;
                             i__5 = i__ + j * a_dim1;
-                            z__2.r =
-                                temp.r * (*a.offset(i__5 as isize)).r -
-                                    temp.i * (*a.offset(i__5 as isize)).i;
-                            z__2.i =
-                                temp.r * (*a.offset(i__5 as isize)).i +
-                                    temp.i * (*a.offset(i__5 as isize)).r;
+                            z__2.r = temp.r * (*a.offset(i__5 as isize)).r
+                                - temp.i * (*a.offset(i__5 as isize)).i;
+                            z__2.i = temp.r * (*a.offset(i__5 as isize)).i
+                                + temp.i * (*a.offset(i__5 as isize)).r;
                             z__1.r = (*x.offset(i__4 as isize)).r + z__2.r;
                             z__1.i = (*x.offset(i__4 as isize)).i + z__2.i;
                             (*x.offset(i__3 as isize)).r = z__1.r;
@@ -254,16 +274,10 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
                             i__2 = j;
                             i__3 = j;
                             i__4 = j + j * a_dim1;
-                            z__1.r =
-                                (*x.offset(i__3 as isize)).r *
-                                    (*a.offset(i__4 as isize)).r -
-                                    (*x.offset(i__3 as isize)).i *
-                                        (*a.offset(i__4 as isize)).i;
-                            z__1.i =
-                                (*x.offset(i__3 as isize)).r *
-                                    (*a.offset(i__4 as isize)).i +
-                                    (*x.offset(i__3 as isize)).i *
-                                        (*a.offset(i__4 as isize)).r;
+                            z__1.r = (*x.offset(i__3 as isize)).r * (*a.offset(i__4 as isize)).r
+                                - (*x.offset(i__3 as isize)).i * (*a.offset(i__4 as isize)).i;
+                            z__1.i = (*x.offset(i__3 as isize)).r * (*a.offset(i__4 as isize)).i
+                                + (*x.offset(i__3 as isize)).i * (*a.offset(i__4 as isize)).r;
                             (*x.offset(i__2 as isize)).r = z__1.r;
                             (*x.offset(i__2 as isize)).i = z__1.i
                         }
@@ -276,8 +290,9 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
                 j = 1 as libc::c_int as integer;
                 while j <= i__1 {
                     i__2 = jx;
-                    if (*x.offset(i__2 as isize)).r != 0.0f64 ||
-                           (*x.offset(i__2 as isize)).i != 0.0f64 {
+                    if (*x.offset(i__2 as isize)).r != 0.0f64
+                        || (*x.offset(i__2 as isize)).i != 0.0f64
+                    {
                         i__2 = jx;
                         temp.r = (*x.offset(i__2 as isize)).r;
                         temp.i = (*x.offset(i__2 as isize)).i;
@@ -288,12 +303,10 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
                             i__3 = ix;
                             i__4 = ix;
                             i__5 = i__ + j * a_dim1;
-                            z__2.r =
-                                temp.r * (*a.offset(i__5 as isize)).r -
-                                    temp.i * (*a.offset(i__5 as isize)).i;
-                            z__2.i =
-                                temp.r * (*a.offset(i__5 as isize)).i +
-                                    temp.i * (*a.offset(i__5 as isize)).r;
+                            z__2.r = temp.r * (*a.offset(i__5 as isize)).r
+                                - temp.i * (*a.offset(i__5 as isize)).i;
+                            z__2.i = temp.r * (*a.offset(i__5 as isize)).i
+                                + temp.i * (*a.offset(i__5 as isize)).r;
                             z__1.r = (*x.offset(i__4 as isize)).r + z__2.r;
                             z__1.i = (*x.offset(i__4 as isize)).i + z__2.i;
                             (*x.offset(i__3 as isize)).r = z__1.r;
@@ -307,16 +320,10 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
                             i__2 = jx;
                             i__3 = jx;
                             i__4 = j + j * a_dim1;
-                            z__1.r =
-                                (*x.offset(i__3 as isize)).r *
-                                    (*a.offset(i__4 as isize)).r -
-                                    (*x.offset(i__3 as isize)).i *
-                                        (*a.offset(i__4 as isize)).i;
-                            z__1.i =
-                                (*x.offset(i__3 as isize)).r *
-                                    (*a.offset(i__4 as isize)).i +
-                                    (*x.offset(i__3 as isize)).i *
-                                        (*a.offset(i__4 as isize)).r;
+                            z__1.r = (*x.offset(i__3 as isize)).r * (*a.offset(i__4 as isize)).r
+                                - (*x.offset(i__3 as isize)).i * (*a.offset(i__4 as isize)).i;
+                            z__1.i = (*x.offset(i__3 as isize)).r * (*a.offset(i__4 as isize)).i
+                                + (*x.offset(i__3 as isize)).i * (*a.offset(i__4 as isize)).r;
                             (*x.offset(i__2 as isize)).r = z__1.r;
                             (*x.offset(i__2 as isize)).i = z__1.i
                         }
@@ -329,8 +336,8 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
             j = *n;
             while j >= 1 as libc::c_int as libc::c_long {
                 i__1 = j;
-                if (*x.offset(i__1 as isize)).r != 0.0f64 ||
-                       (*x.offset(i__1 as isize)).i != 0.0f64 {
+                if (*x.offset(i__1 as isize)).r != 0.0f64 || (*x.offset(i__1 as isize)).i != 0.0f64
+                {
                     i__1 = j;
                     temp.r = (*x.offset(i__1 as isize)).r;
                     temp.i = (*x.offset(i__1 as isize)).i;
@@ -340,12 +347,10 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
                         i__2 = i__;
                         i__3 = i__;
                         i__4 = i__ + j * a_dim1;
-                        z__2.r =
-                            temp.r * (*a.offset(i__4 as isize)).r -
-                                temp.i * (*a.offset(i__4 as isize)).i;
-                        z__2.i =
-                            temp.r * (*a.offset(i__4 as isize)).i +
-                                temp.i * (*a.offset(i__4 as isize)).r;
+                        z__2.r = temp.r * (*a.offset(i__4 as isize)).r
+                            - temp.i * (*a.offset(i__4 as isize)).i;
+                        z__2.i = temp.r * (*a.offset(i__4 as isize)).i
+                            + temp.i * (*a.offset(i__4 as isize)).r;
                         z__1.r = (*x.offset(i__3 as isize)).r + z__2.r;
                         z__1.i = (*x.offset(i__3 as isize)).i + z__2.i;
                         (*x.offset(i__2 as isize)).r = z__1.r;
@@ -358,16 +363,10 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
                         i__1 = j;
                         i__2 = j;
                         i__3 = j + j * a_dim1;
-                        z__1.r =
-                            (*x.offset(i__2 as isize)).r *
-                                (*a.offset(i__3 as isize)).r -
-                                (*x.offset(i__2 as isize)).i *
-                                    (*a.offset(i__3 as isize)).i;
-                        z__1.i =
-                            (*x.offset(i__2 as isize)).r *
-                                (*a.offset(i__3 as isize)).i +
-                                (*x.offset(i__2 as isize)).i *
-                                    (*a.offset(i__3 as isize)).r;
+                        z__1.r = (*x.offset(i__2 as isize)).r * (*a.offset(i__3 as isize)).r
+                            - (*x.offset(i__2 as isize)).i * (*a.offset(i__3 as isize)).i;
+                        z__1.i = (*x.offset(i__2 as isize)).r * (*a.offset(i__3 as isize)).i
+                            + (*x.offset(i__2 as isize)).i * (*a.offset(i__3 as isize)).r;
                         (*x.offset(i__1 as isize)).r = z__1.r;
                         (*x.offset(i__1 as isize)).i = z__1.i
                     }
@@ -380,8 +379,8 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
             j = *n;
             while j >= 1 as libc::c_int as libc::c_long {
                 i__1 = jx;
-                if (*x.offset(i__1 as isize)).r != 0.0f64 ||
-                       (*x.offset(i__1 as isize)).i != 0.0f64 {
+                if (*x.offset(i__1 as isize)).r != 0.0f64 || (*x.offset(i__1 as isize)).i != 0.0f64
+                {
                     i__1 = jx;
                     temp.r = (*x.offset(i__1 as isize)).r;
                     temp.i = (*x.offset(i__1 as isize)).i;
@@ -392,12 +391,10 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
                         i__2 = ix;
                         i__3 = ix;
                         i__4 = i__ + j * a_dim1;
-                        z__2.r =
-                            temp.r * (*a.offset(i__4 as isize)).r -
-                                temp.i * (*a.offset(i__4 as isize)).i;
-                        z__2.i =
-                            temp.r * (*a.offset(i__4 as isize)).i +
-                                temp.i * (*a.offset(i__4 as isize)).r;
+                        z__2.r = temp.r * (*a.offset(i__4 as isize)).r
+                            - temp.i * (*a.offset(i__4 as isize)).i;
+                        z__2.i = temp.r * (*a.offset(i__4 as isize)).i
+                            + temp.i * (*a.offset(i__4 as isize)).r;
                         z__1.r = (*x.offset(i__3 as isize)).r + z__2.r;
                         z__1.i = (*x.offset(i__3 as isize)).i + z__2.i;
                         (*x.offset(i__2 as isize)).r = z__1.r;
@@ -411,16 +408,10 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
                         i__1 = jx;
                         i__2 = jx;
                         i__3 = j + j * a_dim1;
-                        z__1.r =
-                            (*x.offset(i__2 as isize)).r *
-                                (*a.offset(i__3 as isize)).r -
-                                (*x.offset(i__2 as isize)).i *
-                                    (*a.offset(i__3 as isize)).i;
-                        z__1.i =
-                            (*x.offset(i__2 as isize)).r *
-                                (*a.offset(i__3 as isize)).i +
-                                (*x.offset(i__2 as isize)).i *
-                                    (*a.offset(i__3 as isize)).r;
+                        z__1.r = (*x.offset(i__2 as isize)).r * (*a.offset(i__3 as isize)).r
+                            - (*x.offset(i__2 as isize)).i * (*a.offset(i__3 as isize)).i;
+                        z__1.i = (*x.offset(i__2 as isize)).r * (*a.offset(i__3 as isize)).i
+                            + (*x.offset(i__2 as isize)).i * (*a.offset(i__3 as isize)).r;
                         (*x.offset(i__1 as isize)).r = z__1.r;
                         (*x.offset(i__1 as isize)).i = z__1.i
                     }
@@ -429,9 +420,11 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
                 j -= 1
             }
         }
-    } else if lsame__0(uplo,
-                       b"U\x00" as *const u8 as *const libc::c_char as
-                           *mut libc::c_char) != 0 {
+    } else if lsame__0(
+        uplo,
+        b"U\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+    ) != 0
+    {
         if *incx == 1 as libc::c_int as libc::c_long {
             j = *n;
             while j >= 1 as libc::c_int as libc::c_long {
@@ -441,12 +434,10 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
                 if noconj != 0 {
                     if nounit != 0 {
                         i__1 = j + j * a_dim1;
-                        z__1.r =
-                            temp.r * (*a.offset(i__1 as isize)).r -
-                                temp.i * (*a.offset(i__1 as isize)).i;
-                        z__1.i =
-                            temp.r * (*a.offset(i__1 as isize)).i +
-                                temp.i * (*a.offset(i__1 as isize)).r;
+                        z__1.r = temp.r * (*a.offset(i__1 as isize)).r
+                            - temp.i * (*a.offset(i__1 as isize)).i;
+                        z__1.i = temp.r * (*a.offset(i__1 as isize)).i
+                            + temp.i * (*a.offset(i__1 as isize)).r;
                         temp.r = z__1.r;
                         temp.i = z__1.i
                     }
@@ -454,16 +445,10 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
                     while i__ >= 1 as libc::c_int as libc::c_long {
                         i__1 = i__ + j * a_dim1;
                         i__2 = i__;
-                        z__2.r =
-                            (*a.offset(i__1 as isize)).r *
-                                (*x.offset(i__2 as isize)).r -
-                                (*a.offset(i__1 as isize)).i *
-                                    (*x.offset(i__2 as isize)).i;
-                        z__2.i =
-                            (*a.offset(i__1 as isize)).r *
-                                (*x.offset(i__2 as isize)).i +
-                                (*a.offset(i__1 as isize)).i *
-                                    (*x.offset(i__2 as isize)).r;
+                        z__2.r = (*a.offset(i__1 as isize)).r * (*x.offset(i__2 as isize)).r
+                            - (*a.offset(i__1 as isize)).i * (*x.offset(i__2 as isize)).i;
+                        z__2.i = (*a.offset(i__1 as isize)).r * (*x.offset(i__2 as isize)).i
+                            + (*a.offset(i__1 as isize)).i * (*x.offset(i__2 as isize)).r;
                         z__1.r = temp.r + z__2.r;
                         z__1.i = temp.i + z__2.i;
                         temp.r = z__1.r;
@@ -475,8 +460,7 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
                     }
                 } else {
                     if nounit != 0 {
-                        d_cnjg_0(&mut z__2,
-                                 &mut *a.offset((j + j * a_dim1) as isize));
+                        d_cnjg_0(&mut z__2, &mut *a.offset((j + j * a_dim1) as isize));
                         z__1.r = temp.r * z__2.r - temp.i * z__2.i;
                         z__1.i = temp.r * z__2.i + temp.i * z__2.r;
                         temp.r = z__1.r;
@@ -484,15 +468,12 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
                     }
                     i__ = j - 1 as libc::c_int as libc::c_long;
                     while i__ >= 1 as libc::c_int as libc::c_long {
-                        d_cnjg_0(&mut z__3,
-                                 &mut *a.offset((i__ + j * a_dim1) as isize));
+                        d_cnjg_0(&mut z__3, &mut *a.offset((i__ + j * a_dim1) as isize));
                         i__1 = i__;
-                        z__2.r =
-                            z__3.r * (*x.offset(i__1 as isize)).r -
-                                z__3.i * (*x.offset(i__1 as isize)).i;
-                        z__2.i =
-                            z__3.r * (*x.offset(i__1 as isize)).i +
-                                z__3.i * (*x.offset(i__1 as isize)).r;
+                        z__2.r = z__3.r * (*x.offset(i__1 as isize)).r
+                            - z__3.i * (*x.offset(i__1 as isize)).i;
+                        z__2.i = z__3.r * (*x.offset(i__1 as isize)).i
+                            + z__3.i * (*x.offset(i__1 as isize)).r;
                         z__1.r = temp.r + z__2.r;
                         z__1.i = temp.i + z__2.i;
                         temp.r = z__1.r;
@@ -517,12 +498,10 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
                 if noconj != 0 {
                     if nounit != 0 {
                         i__1 = j + j * a_dim1;
-                        z__1.r =
-                            temp.r * (*a.offset(i__1 as isize)).r -
-                                temp.i * (*a.offset(i__1 as isize)).i;
-                        z__1.i =
-                            temp.r * (*a.offset(i__1 as isize)).i +
-                                temp.i * (*a.offset(i__1 as isize)).r;
+                        z__1.r = temp.r * (*a.offset(i__1 as isize)).r
+                            - temp.i * (*a.offset(i__1 as isize)).i;
+                        z__1.i = temp.r * (*a.offset(i__1 as isize)).i
+                            + temp.i * (*a.offset(i__1 as isize)).r;
                         temp.r = z__1.r;
                         temp.i = z__1.i
                     }
@@ -531,16 +510,10 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
                         ix -= *incx;
                         i__1 = i__ + j * a_dim1;
                         i__2 = ix;
-                        z__2.r =
-                            (*a.offset(i__1 as isize)).r *
-                                (*x.offset(i__2 as isize)).r -
-                                (*a.offset(i__1 as isize)).i *
-                                    (*x.offset(i__2 as isize)).i;
-                        z__2.i =
-                            (*a.offset(i__1 as isize)).r *
-                                (*x.offset(i__2 as isize)).i +
-                                (*a.offset(i__1 as isize)).i *
-                                    (*x.offset(i__2 as isize)).r;
+                        z__2.r = (*a.offset(i__1 as isize)).r * (*x.offset(i__2 as isize)).r
+                            - (*a.offset(i__1 as isize)).i * (*x.offset(i__2 as isize)).i;
+                        z__2.i = (*a.offset(i__1 as isize)).r * (*x.offset(i__2 as isize)).i
+                            + (*a.offset(i__1 as isize)).i * (*x.offset(i__2 as isize)).r;
                         z__1.r = temp.r + z__2.r;
                         z__1.i = temp.i + z__2.i;
                         temp.r = z__1.r;
@@ -551,8 +524,7 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
                     }
                 } else {
                     if nounit != 0 {
-                        d_cnjg_0(&mut z__2,
-                                 &mut *a.offset((j + j * a_dim1) as isize));
+                        d_cnjg_0(&mut z__2, &mut *a.offset((j + j * a_dim1) as isize));
                         z__1.r = temp.r * z__2.r - temp.i * z__2.i;
                         z__1.i = temp.r * z__2.i + temp.i * z__2.r;
                         temp.r = z__1.r;
@@ -561,15 +533,12 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
                     i__ = j - 1 as libc::c_int as libc::c_long;
                     while i__ >= 1 as libc::c_int as libc::c_long {
                         ix -= *incx;
-                        d_cnjg_0(&mut z__3,
-                                 &mut *a.offset((i__ + j * a_dim1) as isize));
+                        d_cnjg_0(&mut z__3, &mut *a.offset((i__ + j * a_dim1) as isize));
                         i__1 = ix;
-                        z__2.r =
-                            z__3.r * (*x.offset(i__1 as isize)).r -
-                                z__3.i * (*x.offset(i__1 as isize)).i;
-                        z__2.i =
-                            z__3.r * (*x.offset(i__1 as isize)).i +
-                                z__3.i * (*x.offset(i__1 as isize)).r;
+                        z__2.r = z__3.r * (*x.offset(i__1 as isize)).r
+                            - z__3.i * (*x.offset(i__1 as isize)).i;
+                        z__2.i = z__3.r * (*x.offset(i__1 as isize)).i
+                            + z__3.i * (*x.offset(i__1 as isize)).r;
                         z__1.r = temp.r + z__2.r;
                         z__1.i = temp.i + z__2.i;
                         temp.r = z__1.r;
@@ -595,12 +564,10 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
             if noconj != 0 {
                 if nounit != 0 {
                     i__2 = j + j * a_dim1;
-                    z__1.r =
-                        temp.r * (*a.offset(i__2 as isize)).r -
-                            temp.i * (*a.offset(i__2 as isize)).i;
-                    z__1.i =
-                        temp.r * (*a.offset(i__2 as isize)).i +
-                            temp.i * (*a.offset(i__2 as isize)).r;
+                    z__1.r = temp.r * (*a.offset(i__2 as isize)).r
+                        - temp.i * (*a.offset(i__2 as isize)).i;
+                    z__1.i = temp.r * (*a.offset(i__2 as isize)).i
+                        + temp.i * (*a.offset(i__2 as isize)).r;
                     temp.r = z__1.r;
                     temp.i = z__1.i
                 }
@@ -609,16 +576,10 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
                 while i__ <= i__2 {
                     i__3 = i__ + j * a_dim1;
                     i__4 = i__;
-                    z__2.r =
-                        (*a.offset(i__3 as isize)).r *
-                            (*x.offset(i__4 as isize)).r -
-                            (*a.offset(i__3 as isize)).i *
-                                (*x.offset(i__4 as isize)).i;
-                    z__2.i =
-                        (*a.offset(i__3 as isize)).r *
-                            (*x.offset(i__4 as isize)).i +
-                            (*a.offset(i__3 as isize)).i *
-                                (*x.offset(i__4 as isize)).r;
+                    z__2.r = (*a.offset(i__3 as isize)).r * (*x.offset(i__4 as isize)).r
+                        - (*a.offset(i__3 as isize)).i * (*x.offset(i__4 as isize)).i;
+                    z__2.i = (*a.offset(i__3 as isize)).r * (*x.offset(i__4 as isize)).i
+                        + (*a.offset(i__3 as isize)).i * (*x.offset(i__4 as isize)).r;
                     z__1.r = temp.r + z__2.r;
                     z__1.i = temp.i + z__2.i;
                     temp.r = z__1.r;
@@ -629,8 +590,7 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
                 }
             } else {
                 if nounit != 0 {
-                    d_cnjg_0(&mut z__2,
-                             &mut *a.offset((j + j * a_dim1) as isize));
+                    d_cnjg_0(&mut z__2, &mut *a.offset((j + j * a_dim1) as isize));
                     z__1.r = temp.r * z__2.r - temp.i * z__2.i;
                     z__1.i = temp.r * z__2.i + temp.i * z__2.r;
                     temp.r = z__1.r;
@@ -639,15 +599,12 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
                 i__2 = *n;
                 i__ = j + 1 as libc::c_int as libc::c_long;
                 while i__ <= i__2 {
-                    d_cnjg_0(&mut z__3,
-                             &mut *a.offset((i__ + j * a_dim1) as isize));
+                    d_cnjg_0(&mut z__3, &mut *a.offset((i__ + j * a_dim1) as isize));
                     i__3 = i__;
-                    z__2.r =
-                        z__3.r * (*x.offset(i__3 as isize)).r -
-                            z__3.i * (*x.offset(i__3 as isize)).i;
-                    z__2.i =
-                        z__3.r * (*x.offset(i__3 as isize)).i +
-                            z__3.i * (*x.offset(i__3 as isize)).r;
+                    z__2.r = z__3.r * (*x.offset(i__3 as isize)).r
+                        - z__3.i * (*x.offset(i__3 as isize)).i;
+                    z__2.i = z__3.r * (*x.offset(i__3 as isize)).i
+                        + z__3.i * (*x.offset(i__3 as isize)).r;
                     z__1.r = temp.r + z__2.r;
                     z__1.i = temp.i + z__2.i;
                     temp.r = z__1.r;
@@ -673,12 +630,10 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
             if noconj != 0 {
                 if nounit != 0 {
                     i__2 = j + j * a_dim1;
-                    z__1.r =
-                        temp.r * (*a.offset(i__2 as isize)).r -
-                            temp.i * (*a.offset(i__2 as isize)).i;
-                    z__1.i =
-                        temp.r * (*a.offset(i__2 as isize)).i +
-                            temp.i * (*a.offset(i__2 as isize)).r;
+                    z__1.r = temp.r * (*a.offset(i__2 as isize)).r
+                        - temp.i * (*a.offset(i__2 as isize)).i;
+                    z__1.i = temp.r * (*a.offset(i__2 as isize)).i
+                        + temp.i * (*a.offset(i__2 as isize)).r;
                     temp.r = z__1.r;
                     temp.i = z__1.i
                 }
@@ -688,16 +643,10 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
                     ix += *incx;
                     i__3 = i__ + j * a_dim1;
                     i__4 = ix;
-                    z__2.r =
-                        (*a.offset(i__3 as isize)).r *
-                            (*x.offset(i__4 as isize)).r -
-                            (*a.offset(i__3 as isize)).i *
-                                (*x.offset(i__4 as isize)).i;
-                    z__2.i =
-                        (*a.offset(i__3 as isize)).r *
-                            (*x.offset(i__4 as isize)).i +
-                            (*a.offset(i__3 as isize)).i *
-                                (*x.offset(i__4 as isize)).r;
+                    z__2.r = (*a.offset(i__3 as isize)).r * (*x.offset(i__4 as isize)).r
+                        - (*a.offset(i__3 as isize)).i * (*x.offset(i__4 as isize)).i;
+                    z__2.i = (*a.offset(i__3 as isize)).r * (*x.offset(i__4 as isize)).i
+                        + (*a.offset(i__3 as isize)).i * (*x.offset(i__4 as isize)).r;
                     z__1.r = temp.r + z__2.r;
                     z__1.i = temp.i + z__2.i;
                     temp.r = z__1.r;
@@ -708,8 +657,7 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
                 }
             } else {
                 if nounit != 0 {
-                    d_cnjg_0(&mut z__2,
-                             &mut *a.offset((j + j * a_dim1) as isize));
+                    d_cnjg_0(&mut z__2, &mut *a.offset((j + j * a_dim1) as isize));
                     z__1.r = temp.r * z__2.r - temp.i * z__2.i;
                     z__1.i = temp.r * z__2.i + temp.i * z__2.r;
                     temp.r = z__1.r;
@@ -719,15 +667,12 @@ pub unsafe extern "C" fn f2c_ztrmv(mut uplo: *mut libc::c_char,
                 i__ = j + 1 as libc::c_int as libc::c_long;
                 while i__ <= i__2 {
                     ix += *incx;
-                    d_cnjg_0(&mut z__3,
-                             &mut *a.offset((i__ + j * a_dim1) as isize));
+                    d_cnjg_0(&mut z__3, &mut *a.offset((i__ + j * a_dim1) as isize));
                     i__3 = ix;
-                    z__2.r =
-                        z__3.r * (*x.offset(i__3 as isize)).r -
-                            z__3.i * (*x.offset(i__3 as isize)).i;
-                    z__2.i =
-                        z__3.r * (*x.offset(i__3 as isize)).i +
-                            z__3.i * (*x.offset(i__3 as isize)).r;
+                    z__2.r = z__3.r * (*x.offset(i__3 as isize)).r
+                        - z__3.i * (*x.offset(i__3 as isize)).i;
+                    z__2.i = z__3.r * (*x.offset(i__3 as isize)).i
+                        + z__3.i * (*x.offset(i__3 as isize)).r;
                     z__1.r = temp.r + z__2.r;
                     z__1.i = temp.i + z__2.i;
                     temp.r = z__1.r;

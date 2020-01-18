@@ -1,8 +1,8 @@
-use ::libc;
+use libc;
 /* f2c.h  --  Standard Fortran to C header file */
 /* *  barf  [ba:rf]  2.  "He suggested using FORTRAN, and everybody barfed."
 
-	- From The Shogakukan DICTIONARY OF NEW ENGLISH (Second edition) */
+- From The Shogakukan DICTIONARY OF NEW ENGLISH (Second edition) */
 pub type integer = libc::c_long;
 pub type real = libc::c_float;
 #[derive(Copy, Clone)]
@@ -14,26 +14,30 @@ pub struct complex {
 pub type logical = libc::c_long;
 /* chbmv.f -- translated by f2c (version 20061008).
    You must link the resulting object file with libf2c:
-	on Microsoft Windows system, link with libf2c.lib;
-	on Linux or Unix systems, link with .../path/to/libf2c.a -lm
-	or, if you install libf2c.a in a standard place, with -lf2c -lm
-	-- in that order, at the end of the command line, as in
-		cc *.o -lf2c -lm
-	Source for libf2c is in /netlib/f2c/libf2c.zip, e.g.,
+    on Microsoft Windows system, link with libf2c.lib;
+    on Linux or Unix systems, link with .../path/to/libf2c.a -lm
+    or, if you install libf2c.a in a standard place, with -lf2c -lm
+    -- in that order, at the end of the command line, as in
+        cc *.o -lf2c -lm
+    Source for libf2c is in /netlib/f2c/libf2c.zip, e.g.,
 
-		http://www.netlib.org/f2c/libf2c.zip
+        http://www.netlib.org/f2c/libf2c.zip
 */
 /* Subroutine */
 #[no_mangle]
-pub unsafe extern "C" fn f2c_chbmv(mut uplo: *mut libc::c_char,
-                                   mut n: *mut integer, mut k: *mut integer,
-                                   mut alpha: *mut complex,
-                                   mut a: *mut complex, mut lda: *mut integer,
-                                   mut x: *mut complex,
-                                   mut incx: *mut integer,
-                                   mut beta: *mut complex,
-                                   mut y: *mut complex,
-                                   mut incy: *mut integer) -> libc::c_int {
+pub unsafe extern "C" fn f2c_chbmv(
+    mut uplo: *mut libc::c_char,
+    mut n: *mut integer,
+    mut k: *mut integer,
+    mut alpha: *mut complex,
+    mut a: *mut complex,
+    mut lda: *mut integer,
+    mut x: *mut complex,
+    mut incx: *mut integer,
+    mut beta: *mut complex,
+    mut y: *mut complex,
+    mut incy: *mut integer,
+) -> libc::c_int {
     /* System generated locals */
     let mut a_dim1: integer = 0;
     let mut a_offset: integer = 0;
@@ -43,10 +47,10 @@ pub unsafe extern "C" fn f2c_chbmv(mut uplo: *mut libc::c_char,
     let mut i__4: integer = 0;
     let mut i__5: integer = 0;
     let mut r__1: real = 0.;
-    let mut q__1: complex = complex{r: 0., i: 0.,};
-    let mut q__2: complex = complex{r: 0., i: 0.,};
-    let mut q__3: complex = complex{r: 0., i: 0.,};
-    let mut q__4: complex = complex{r: 0., i: 0.,};
+    let mut q__1: complex = complex { r: 0., i: 0. };
+    let mut q__2: complex = complex { r: 0., i: 0. };
+    let mut q__3: complex = complex { r: 0., i: 0. };
+    let mut q__4: complex = complex { r: 0., i: 0. };
     /* Builtin functions */
     extern "C" {
         #[link_name = "r_cnjg"]
@@ -63,8 +67,8 @@ pub unsafe extern "C" fn f2c_chbmv(mut uplo: *mut libc::c_char,
     let mut kx: integer = 0;
     let mut ky: integer = 0;
     let mut info: integer = 0;
-    let mut temp1: complex = complex{r: 0., i: 0.,};
-    let mut temp2: complex = complex{r: 0., i: 0.,};
+    let mut temp1: complex = complex { r: 0., i: 0. };
+    let mut temp2: complex = complex { r: 0., i: 0. };
     extern "C" {
         #[link_name = "lsame_"]
         fn lsame__0(_: *mut libc::c_char, _: *mut libc::c_char) -> logical;
@@ -75,114 +79,114 @@ pub unsafe extern "C" fn f2c_chbmv(mut uplo: *mut libc::c_char,
         fn xerbla__0(_: *mut libc::c_char, _: *mut integer) -> libc::c_int;
     }
     /*     .. Scalar Arguments .. */
-/*     .. */
-/*     .. Array Arguments .. */
-/*     .. */
+    /*     .. */
+    /*     .. Array Arguments .. */
+    /*     .. */
     /*  Purpose */
-/*  ======= */
+    /*  ======= */
     /*  CHBMV  performs the matrix-vector  operation */
     /*     y := alpha*A*x + beta*y, */
     /*  where alpha and beta are scalars, x and y are n element vectors and */
-/*  A is an n by n hermitian band matrix, with k super-diagonals. */
+    /*  A is an n by n hermitian band matrix, with k super-diagonals. */
     /*  Arguments */
-/*  ========== */
+    /*  ========== */
     /*  UPLO   - CHARACTER*1. */
-/*           On entry, UPLO specifies whether the upper or lower */
-/*           triangular part of the band matrix A is being supplied as */
-/*           follows: */
+    /*           On entry, UPLO specifies whether the upper or lower */
+    /*           triangular part of the band matrix A is being supplied as */
+    /*           follows: */
     /*              UPLO = 'U' or 'u'   The upper triangular part of A is */
-/*                                  being supplied. */
+    /*                                  being supplied. */
     /*              UPLO = 'L' or 'l'   The lower triangular part of A is */
-/*                                  being supplied. */
+    /*                                  being supplied. */
     /*           Unchanged on exit. */
     /*  N      - INTEGER. */
-/*           On entry, N specifies the order of the matrix A. */
-/*           N must be at least zero. */
-/*           Unchanged on exit. */
+    /*           On entry, N specifies the order of the matrix A. */
+    /*           N must be at least zero. */
+    /*           Unchanged on exit. */
     /*  K      - INTEGER. */
-/*           On entry, K specifies the number of super-diagonals of the */
-/*           matrix A. K must satisfy  0 .le. K. */
-/*           Unchanged on exit. */
+    /*           On entry, K specifies the number of super-diagonals of the */
+    /*           matrix A. K must satisfy  0 .le. K. */
+    /*           Unchanged on exit. */
     /*  ALPHA  - COMPLEX         . */
-/*           On entry, ALPHA specifies the scalar alpha. */
-/*           Unchanged on exit. */
+    /*           On entry, ALPHA specifies the scalar alpha. */
+    /*           Unchanged on exit. */
     /*  A      - COMPLEX          array of DIMENSION ( LDA, n ). */
-/*           Before entry with UPLO = 'U' or 'u', the leading ( k + 1 ) */
-/*           by n part of the array A must contain the upper triangular */
-/*           band part of the hermitian matrix, supplied column by */
-/*           column, with the leading diagonal of the matrix in row */
-/*           ( k + 1 ) of the array, the first super-diagonal starting at */
-/*           position 2 in row k, and so on. The top left k by k triangle */
-/*           of the array A is not referenced. */
-/*           The following program segment will transfer the upper */
-/*           triangular part of a hermitian band matrix from conventional */
-/*           full matrix storage to band storage: */
+    /*           Before entry with UPLO = 'U' or 'u', the leading ( k + 1 ) */
+    /*           by n part of the array A must contain the upper triangular */
+    /*           band part of the hermitian matrix, supplied column by */
+    /*           column, with the leading diagonal of the matrix in row */
+    /*           ( k + 1 ) of the array, the first super-diagonal starting at */
+    /*           position 2 in row k, and so on. The top left k by k triangle */
+    /*           of the array A is not referenced. */
+    /*           The following program segment will transfer the upper */
+    /*           triangular part of a hermitian band matrix from conventional */
+    /*           full matrix storage to band storage: */
     /*                 DO 20, J = 1, N */
-/*                    M = K + 1 - J */
-/*                    DO 10, I = MAX( 1, J - K ), J */
-/*                       A( M + I, J ) = matrix( I, J ) */
-/*              10    CONTINUE */
-/*              20 CONTINUE */
+    /*                    M = K + 1 - J */
+    /*                    DO 10, I = MAX( 1, J - K ), J */
+    /*                       A( M + I, J ) = matrix( I, J ) */
+    /*              10    CONTINUE */
+    /*              20 CONTINUE */
     /*           Before entry with UPLO = 'L' or 'l', the leading ( k + 1 ) */
-/*           by n part of the array A must contain the lower triangular */
-/*           band part of the hermitian matrix, supplied column by */
-/*           column, with the leading diagonal of the matrix in row 1 of */
-/*           the array, the first sub-diagonal starting at position 1 in */
-/*           row 2, and so on. The bottom right k by k triangle of the */
-/*           array A is not referenced. */
-/*           The following program segment will transfer the lower */
-/*           triangular part of a hermitian band matrix from conventional */
-/*           full matrix storage to band storage: */
+    /*           by n part of the array A must contain the lower triangular */
+    /*           band part of the hermitian matrix, supplied column by */
+    /*           column, with the leading diagonal of the matrix in row 1 of */
+    /*           the array, the first sub-diagonal starting at position 1 in */
+    /*           row 2, and so on. The bottom right k by k triangle of the */
+    /*           array A is not referenced. */
+    /*           The following program segment will transfer the lower */
+    /*           triangular part of a hermitian band matrix from conventional */
+    /*           full matrix storage to band storage: */
     /*                 DO 20, J = 1, N */
-/*                    M = 1 - J */
-/*                    DO 10, I = J, MIN( N, J + K ) */
-/*                       A( M + I, J ) = matrix( I, J ) */
-/*              10    CONTINUE */
-/*              20 CONTINUE */
+    /*                    M = 1 - J */
+    /*                    DO 10, I = J, MIN( N, J + K ) */
+    /*                       A( M + I, J ) = matrix( I, J ) */
+    /*              10    CONTINUE */
+    /*              20 CONTINUE */
     /*           Note that the imaginary parts of the diagonal elements need */
-/*           not be set and are assumed to be zero. */
-/*           Unchanged on exit. */
+    /*           not be set and are assumed to be zero. */
+    /*           Unchanged on exit. */
     /*  LDA    - INTEGER. */
-/*           On entry, LDA specifies the first dimension of A as declared */
-/*           in the calling (sub) program. LDA must be at least */
-/*           ( k + 1 ). */
-/*           Unchanged on exit. */
+    /*           On entry, LDA specifies the first dimension of A as declared */
+    /*           in the calling (sub) program. LDA must be at least */
+    /*           ( k + 1 ). */
+    /*           Unchanged on exit. */
     /*  X      - COMPLEX          array of DIMENSION at least */
-/*           ( 1 + ( n - 1 )*abs( INCX ) ). */
-/*           Before entry, the incremented array X must contain the */
-/*           vector x. */
-/*           Unchanged on exit. */
+    /*           ( 1 + ( n - 1 )*abs( INCX ) ). */
+    /*           Before entry, the incremented array X must contain the */
+    /*           vector x. */
+    /*           Unchanged on exit. */
     /*  INCX   - INTEGER. */
-/*           On entry, INCX specifies the increment for the elements of */
-/*           X. INCX must not be zero. */
-/*           Unchanged on exit. */
+    /*           On entry, INCX specifies the increment for the elements of */
+    /*           X. INCX must not be zero. */
+    /*           Unchanged on exit. */
     /*  BETA   - COMPLEX         . */
-/*           On entry, BETA specifies the scalar beta. */
-/*           Unchanged on exit. */
+    /*           On entry, BETA specifies the scalar beta. */
+    /*           Unchanged on exit. */
     /*  Y      - COMPLEX          array of DIMENSION at least */
-/*           ( 1 + ( n - 1 )*abs( INCY ) ). */
-/*           Before entry, the incremented array Y must contain the */
-/*           vector y. On exit, Y is overwritten by the updated vector y. */
+    /*           ( 1 + ( n - 1 )*abs( INCY ) ). */
+    /*           Before entry, the incremented array Y must contain the */
+    /*           vector y. On exit, Y is overwritten by the updated vector y. */
     /*  INCY   - INTEGER. */
-/*           On entry, INCY specifies the increment for the elements of */
-/*           Y. INCY must not be zero. */
-/*           Unchanged on exit. */
+    /*           On entry, INCY specifies the increment for the elements of */
+    /*           Y. INCY must not be zero. */
+    /*           Unchanged on exit. */
     /*  Level 2 Blas routine. */
     /*  -- Written on 22-October-1986. */
-/*     Jack Dongarra, Argonne National Lab. */
-/*     Jeremy Du Croz, Nag Central Office. */
-/*     Sven Hammarling, Nag Central Office. */
-/*     Richard Hanson, Sandia National Labs. */
+    /*     Jack Dongarra, Argonne National Lab. */
+    /*     Jeremy Du Croz, Nag Central Office. */
+    /*     Sven Hammarling, Nag Central Office. */
+    /*     Richard Hanson, Sandia National Labs. */
     /*     .. Parameters .. */
-/*     .. */
-/*     .. Local Scalars .. */
-/*     .. */
-/*     .. External Functions .. */
-/*     .. */
-/*     .. External Subroutines .. */
-/*     .. */
-/*     .. Intrinsic Functions .. */
-/*     .. */
+    /*     .. */
+    /*     .. Local Scalars .. */
+    /*     .. */
+    /*     .. External Functions .. */
+    /*     .. */
+    /*     .. External Subroutines .. */
+    /*     .. */
+    /*     .. Intrinsic Functions .. */
+    /*     .. */
     /*     Test the input parameters. */
     /* Parameter adjustments */
     a_dim1 = *lda;
@@ -192,12 +196,15 @@ pub unsafe extern "C" fn f2c_chbmv(mut uplo: *mut libc::c_char,
     y = y.offset(-1);
     /* Function Body */
     info = 0 as libc::c_int as integer;
-    if lsame__0(uplo,
-                b"U\x00" as *const u8 as *const libc::c_char as
-                    *mut libc::c_char) == 0 &&
-           lsame__0(uplo,
-                    b"L\x00" as *const u8 as *const libc::c_char as
-                        *mut libc::c_char) == 0 {
+    if lsame__0(
+        uplo,
+        b"U\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+    ) == 0
+        && lsame__0(
+            uplo,
+            b"L\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+        ) == 0
+    {
         info = 1 as libc::c_int as integer
     } else if *n < 0 as libc::c_int as libc::c_long {
         info = 2 as libc::c_int as integer
@@ -211,33 +218,33 @@ pub unsafe extern "C" fn f2c_chbmv(mut uplo: *mut libc::c_char,
         info = 11 as libc::c_int as integer
     }
     if info != 0 as libc::c_int as libc::c_long {
-        xerbla__0(b"CHBMV \x00" as *const u8 as *const libc::c_char as
-                      *mut libc::c_char, &mut info);
-        return 0 as libc::c_int
+        xerbla__0(
+            b"CHBMV \x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+            &mut info,
+        );
+        return 0 as libc::c_int;
     }
     /*     Quick return if possible. */
-    if *n == 0 as libc::c_int as libc::c_long ||
-           (*alpha).r == 0.0f32 && (*alpha).i == 0.0f32 &&
-               ((*beta).r == 1.0f32 && (*beta).i == 0.0f32) {
-        return 0 as libc::c_int
+    if *n == 0 as libc::c_int as libc::c_long
+        || (*alpha).r == 0.0f32
+            && (*alpha).i == 0.0f32
+            && ((*beta).r == 1.0f32 && (*beta).i == 0.0f32)
+    {
+        return 0 as libc::c_int;
     }
     /*     Set up the start points in  X  and  Y. */
     if *incx > 0 as libc::c_int as libc::c_long {
         kx = 1 as libc::c_int as integer
     } else {
-        kx =
-            1 as libc::c_int as libc::c_long -
-                (*n - 1 as libc::c_int as libc::c_long) * *incx
+        kx = 1 as libc::c_int as libc::c_long - (*n - 1 as libc::c_int as libc::c_long) * *incx
     }
     if *incy > 0 as libc::c_int as libc::c_long {
         ky = 1 as libc::c_int as integer
     } else {
-        ky =
-            1 as libc::c_int as libc::c_long -
-                (*n - 1 as libc::c_int as libc::c_long) * *incy
+        ky = 1 as libc::c_int as libc::c_long - (*n - 1 as libc::c_int as libc::c_long) * *incy
     }
     /*     Start the operations. In this version the elements of the array A */
-/*     are accessed sequentially with one pass through A. */
+    /*     are accessed sequentially with one pass through A. */
     /*     First form  y := beta*y. */
     if (*beta).r != 1.0f32 || (*beta).i != 0.0f32 {
         if *incy == 1 as libc::c_int as libc::c_long {
@@ -257,12 +264,10 @@ pub unsafe extern "C" fn f2c_chbmv(mut uplo: *mut libc::c_char,
                 while i__ <= i__1 {
                     i__2 = i__;
                     i__3 = i__;
-                    q__1.r =
-                        (*beta).r * (*y.offset(i__3 as isize)).r -
-                            (*beta).i * (*y.offset(i__3 as isize)).i;
-                    q__1.i =
-                        (*beta).r * (*y.offset(i__3 as isize)).i +
-                            (*beta).i * (*y.offset(i__3 as isize)).r;
+                    q__1.r = (*beta).r * (*y.offset(i__3 as isize)).r
+                        - (*beta).i * (*y.offset(i__3 as isize)).i;
+                    q__1.i = (*beta).r * (*y.offset(i__3 as isize)).i
+                        + (*beta).i * (*y.offset(i__3 as isize)).r;
                     (*y.offset(i__2 as isize)).r = q__1.r;
                     (*y.offset(i__2 as isize)).i = q__1.i;
                     i__ += 1
@@ -288,12 +293,10 @@ pub unsafe extern "C" fn f2c_chbmv(mut uplo: *mut libc::c_char,
                 while i__ <= i__1 {
                     i__2 = iy;
                     i__3 = iy;
-                    q__1.r =
-                        (*beta).r * (*y.offset(i__3 as isize)).r -
-                            (*beta).i * (*y.offset(i__3 as isize)).i;
-                    q__1.i =
-                        (*beta).r * (*y.offset(i__3 as isize)).i +
-                            (*beta).i * (*y.offset(i__3 as isize)).r;
+                    q__1.r = (*beta).r * (*y.offset(i__3 as isize)).r
+                        - (*beta).i * (*y.offset(i__3 as isize)).i;
+                    q__1.i = (*beta).r * (*y.offset(i__3 as isize)).i
+                        + (*beta).i * (*y.offset(i__3 as isize)).r;
                     (*y.offset(i__2 as isize)).r = q__1.r;
                     (*y.offset(i__2 as isize)).i = q__1.i;
                     iy += *incy;
@@ -304,25 +307,24 @@ pub unsafe extern "C" fn f2c_chbmv(mut uplo: *mut libc::c_char,
         }
     }
     if (*alpha).r == 0.0f32 && (*alpha).i == 0.0f32 {
-        return 0 as libc::c_int
+        return 0 as libc::c_int;
     }
-    if lsame__0(uplo,
-                b"U\x00" as *const u8 as *const libc::c_char as
-                    *mut libc::c_char) != 0 {
+    if lsame__0(
+        uplo,
+        b"U\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+    ) != 0
+    {
         /*        Form  y  when upper triangle of A is stored. */
         kplus1 = *k + 1 as libc::c_int as libc::c_long;
-        if *incx == 1 as libc::c_int as libc::c_long &&
-               *incy == 1 as libc::c_int as libc::c_long {
+        if *incx == 1 as libc::c_int as libc::c_long && *incy == 1 as libc::c_int as libc::c_long {
             i__1 = *n;
             j = 1 as libc::c_int as integer;
             while j <= i__1 {
                 i__2 = j;
-                q__1.r =
-                    (*alpha).r * (*x.offset(i__2 as isize)).r -
-                        (*alpha).i * (*x.offset(i__2 as isize)).i;
-                q__1.i =
-                    (*alpha).r * (*x.offset(i__2 as isize)).i +
-                        (*alpha).i * (*x.offset(i__2 as isize)).r;
+                q__1.r = (*alpha).r * (*x.offset(i__2 as isize)).r
+                    - (*alpha).i * (*x.offset(i__2 as isize)).i;
+                q__1.i = (*alpha).r * (*x.offset(i__2 as isize)).i
+                    + (*alpha).i * (*x.offset(i__2 as isize)).r;
                 temp1.r = q__1.r;
                 temp1.i = q__1.i;
                 temp2.r = 0.0f32;
@@ -337,25 +339,20 @@ pub unsafe extern "C" fn f2c_chbmv(mut uplo: *mut libc::c_char,
                     i__2 = i__;
                     i__3 = i__;
                     i__5 = l + i__ + j * a_dim1;
-                    q__2.r =
-                        temp1.r * (*a.offset(i__5 as isize)).r -
-                            temp1.i * (*a.offset(i__5 as isize)).i;
-                    q__2.i =
-                        temp1.r * (*a.offset(i__5 as isize)).i +
-                            temp1.i * (*a.offset(i__5 as isize)).r;
+                    q__2.r = temp1.r * (*a.offset(i__5 as isize)).r
+                        - temp1.i * (*a.offset(i__5 as isize)).i;
+                    q__2.i = temp1.r * (*a.offset(i__5 as isize)).i
+                        + temp1.i * (*a.offset(i__5 as isize)).r;
                     q__1.r = (*y.offset(i__3 as isize)).r + q__2.r;
                     q__1.i = (*y.offset(i__3 as isize)).i + q__2.i;
                     (*y.offset(i__2 as isize)).r = q__1.r;
                     (*y.offset(i__2 as isize)).i = q__1.i;
-                    r_cnjg_0(&mut q__3,
-                             &mut *a.offset((l + i__ + j * a_dim1) as isize));
+                    r_cnjg_0(&mut q__3, &mut *a.offset((l + i__ + j * a_dim1) as isize));
                     i__2 = i__;
-                    q__2.r =
-                        q__3.r * (*x.offset(i__2 as isize)).r -
-                            q__3.i * (*x.offset(i__2 as isize)).i;
-                    q__2.i =
-                        q__3.r * (*x.offset(i__2 as isize)).i +
-                            q__3.i * (*x.offset(i__2 as isize)).r;
+                    q__2.r = q__3.r * (*x.offset(i__2 as isize)).r
+                        - q__3.i * (*x.offset(i__2 as isize)).i;
+                    q__2.i = q__3.r * (*x.offset(i__2 as isize)).i
+                        + q__3.i * (*x.offset(i__2 as isize)).r;
                     q__1.r = temp2.r + q__2.r;
                     q__1.i = temp2.i + q__2.i;
                     temp2.r = q__1.r;
@@ -387,12 +384,10 @@ pub unsafe extern "C" fn f2c_chbmv(mut uplo: *mut libc::c_char,
             j = 1 as libc::c_int as integer;
             while j <= i__1 {
                 i__4 = jx;
-                q__1.r =
-                    (*alpha).r * (*x.offset(i__4 as isize)).r -
-                        (*alpha).i * (*x.offset(i__4 as isize)).i;
-                q__1.i =
-                    (*alpha).r * (*x.offset(i__4 as isize)).i +
-                        (*alpha).i * (*x.offset(i__4 as isize)).r;
+                q__1.r = (*alpha).r * (*x.offset(i__4 as isize)).r
+                    - (*alpha).i * (*x.offset(i__4 as isize)).i;
+                q__1.i = (*alpha).r * (*x.offset(i__4 as isize)).i
+                    + (*alpha).i * (*x.offset(i__4 as isize)).r;
                 temp1.r = q__1.r;
                 temp1.i = q__1.i;
                 temp2.r = 0.0f32;
@@ -409,25 +404,20 @@ pub unsafe extern "C" fn f2c_chbmv(mut uplo: *mut libc::c_char,
                     i__4 = iy;
                     i__2 = iy;
                     i__5 = l + i__ + j * a_dim1;
-                    q__2.r =
-                        temp1.r * (*a.offset(i__5 as isize)).r -
-                            temp1.i * (*a.offset(i__5 as isize)).i;
-                    q__2.i =
-                        temp1.r * (*a.offset(i__5 as isize)).i +
-                            temp1.i * (*a.offset(i__5 as isize)).r;
+                    q__2.r = temp1.r * (*a.offset(i__5 as isize)).r
+                        - temp1.i * (*a.offset(i__5 as isize)).i;
+                    q__2.i = temp1.r * (*a.offset(i__5 as isize)).i
+                        + temp1.i * (*a.offset(i__5 as isize)).r;
                     q__1.r = (*y.offset(i__2 as isize)).r + q__2.r;
                     q__1.i = (*y.offset(i__2 as isize)).i + q__2.i;
                     (*y.offset(i__4 as isize)).r = q__1.r;
                     (*y.offset(i__4 as isize)).i = q__1.i;
-                    r_cnjg_0(&mut q__3,
-                             &mut *a.offset((l + i__ + j * a_dim1) as isize));
+                    r_cnjg_0(&mut q__3, &mut *a.offset((l + i__ + j * a_dim1) as isize));
                     i__4 = ix;
-                    q__2.r =
-                        q__3.r * (*x.offset(i__4 as isize)).r -
-                            q__3.i * (*x.offset(i__4 as isize)).i;
-                    q__2.i =
-                        q__3.r * (*x.offset(i__4 as isize)).i +
-                            q__3.i * (*x.offset(i__4 as isize)).r;
+                    q__2.r = q__3.r * (*x.offset(i__4 as isize)).r
+                        - q__3.i * (*x.offset(i__4 as isize)).i;
+                    q__2.i = q__3.r * (*x.offset(i__4 as isize)).i
+                        + q__3.i * (*x.offset(i__4 as isize)).r;
                     q__1.r = temp2.r + q__2.r;
                     q__1.i = temp2.i + q__2.i;
                     temp2.r = q__1.r;
@@ -454,22 +444,23 @@ pub unsafe extern "C" fn f2c_chbmv(mut uplo: *mut libc::c_char,
                 (*y.offset(i__3 as isize)).i = q__1.i;
                 jx += *incx;
                 jy += *incy;
-                if j > *k { kx += *incx; ky += *incy }
+                if j > *k {
+                    kx += *incx;
+                    ky += *incy
+                }
                 j += 1
             }
         }
-    } else if *incx == 1 as libc::c_int as libc::c_long &&
-                  *incy == 1 as libc::c_int as libc::c_long {
+    } else if *incx == 1 as libc::c_int as libc::c_long && *incy == 1 as libc::c_int as libc::c_long
+    {
         i__1 = *n;
         j = 1 as libc::c_int as integer;
         while j <= i__1 {
             i__3 = j;
-            q__1.r =
-                (*alpha).r * (*x.offset(i__3 as isize)).r -
-                    (*alpha).i * (*x.offset(i__3 as isize)).i;
-            q__1.i =
-                (*alpha).r * (*x.offset(i__3 as isize)).i +
-                    (*alpha).i * (*x.offset(i__3 as isize)).r;
+            q__1.r = (*alpha).r * (*x.offset(i__3 as isize)).r
+                - (*alpha).i * (*x.offset(i__3 as isize)).i;
+            q__1.i = (*alpha).r * (*x.offset(i__3 as isize)).i
+                + (*alpha).i * (*x.offset(i__3 as isize)).r;
             temp1.r = q__1.r;
             temp1.i = q__1.i;
             temp2.r = 0.0f32;
@@ -496,24 +487,19 @@ pub unsafe extern "C" fn f2c_chbmv(mut uplo: *mut libc::c_char,
                 i__2 = i__;
                 i__5 = l + i__ + j * a_dim1;
                 q__2.r =
-                    temp1.r * (*a.offset(i__5 as isize)).r -
-                        temp1.i * (*a.offset(i__5 as isize)).i;
+                    temp1.r * (*a.offset(i__5 as isize)).r - temp1.i * (*a.offset(i__5 as isize)).i;
                 q__2.i =
-                    temp1.r * (*a.offset(i__5 as isize)).i +
-                        temp1.i * (*a.offset(i__5 as isize)).r;
+                    temp1.r * (*a.offset(i__5 as isize)).i + temp1.i * (*a.offset(i__5 as isize)).r;
                 q__1.r = (*y.offset(i__2 as isize)).r + q__2.r;
                 q__1.i = (*y.offset(i__2 as isize)).i + q__2.i;
                 (*y.offset(i__4 as isize)).r = q__1.r;
                 (*y.offset(i__4 as isize)).i = q__1.i;
-                r_cnjg_0(&mut q__3,
-                         &mut *a.offset((l + i__ + j * a_dim1) as isize));
+                r_cnjg_0(&mut q__3, &mut *a.offset((l + i__ + j * a_dim1) as isize));
                 i__4 = i__;
                 q__2.r =
-                    q__3.r * (*x.offset(i__4 as isize)).r -
-                        q__3.i * (*x.offset(i__4 as isize)).i;
+                    q__3.r * (*x.offset(i__4 as isize)).r - q__3.i * (*x.offset(i__4 as isize)).i;
                 q__2.i =
-                    q__3.r * (*x.offset(i__4 as isize)).i +
-                        q__3.i * (*x.offset(i__4 as isize)).r;
+                    q__3.r * (*x.offset(i__4 as isize)).i + q__3.i * (*x.offset(i__4 as isize)).r;
                 q__1.r = temp2.r + q__2.r;
                 q__1.i = temp2.i + q__2.i;
                 temp2.r = q__1.r;
@@ -539,12 +525,10 @@ pub unsafe extern "C" fn f2c_chbmv(mut uplo: *mut libc::c_char,
         j = 1 as libc::c_int as integer;
         while j <= i__1 {
             i__3 = jx;
-            q__1.r =
-                (*alpha).r * (*x.offset(i__3 as isize)).r -
-                    (*alpha).i * (*x.offset(i__3 as isize)).i;
-            q__1.i =
-                (*alpha).r * (*x.offset(i__3 as isize)).i +
-                    (*alpha).i * (*x.offset(i__3 as isize)).r;
+            q__1.r = (*alpha).r * (*x.offset(i__3 as isize)).r
+                - (*alpha).i * (*x.offset(i__3 as isize)).i;
+            q__1.i = (*alpha).r * (*x.offset(i__3 as isize)).i
+                + (*alpha).i * (*x.offset(i__3 as isize)).r;
             temp1.r = q__1.r;
             temp1.i = q__1.i;
             temp2.r = 0.0f32;
@@ -574,24 +558,19 @@ pub unsafe extern "C" fn f2c_chbmv(mut uplo: *mut libc::c_char,
                 i__2 = iy;
                 i__5 = l + i__ + j * a_dim1;
                 q__2.r =
-                    temp1.r * (*a.offset(i__5 as isize)).r -
-                        temp1.i * (*a.offset(i__5 as isize)).i;
+                    temp1.r * (*a.offset(i__5 as isize)).r - temp1.i * (*a.offset(i__5 as isize)).i;
                 q__2.i =
-                    temp1.r * (*a.offset(i__5 as isize)).i +
-                        temp1.i * (*a.offset(i__5 as isize)).r;
+                    temp1.r * (*a.offset(i__5 as isize)).i + temp1.i * (*a.offset(i__5 as isize)).r;
                 q__1.r = (*y.offset(i__2 as isize)).r + q__2.r;
                 q__1.i = (*y.offset(i__2 as isize)).i + q__2.i;
                 (*y.offset(i__4 as isize)).r = q__1.r;
                 (*y.offset(i__4 as isize)).i = q__1.i;
-                r_cnjg_0(&mut q__3,
-                         &mut *a.offset((l + i__ + j * a_dim1) as isize));
+                r_cnjg_0(&mut q__3, &mut *a.offset((l + i__ + j * a_dim1) as isize));
                 i__4 = ix;
                 q__2.r =
-                    q__3.r * (*x.offset(i__4 as isize)).r -
-                        q__3.i * (*x.offset(i__4 as isize)).i;
+                    q__3.r * (*x.offset(i__4 as isize)).r - q__3.i * (*x.offset(i__4 as isize)).i;
                 q__2.i =
-                    q__3.r * (*x.offset(i__4 as isize)).i +
-                        q__3.i * (*x.offset(i__4 as isize)).r;
+                    q__3.r * (*x.offset(i__4 as isize)).i + q__3.i * (*x.offset(i__4 as isize)).r;
                 q__1.r = temp2.r + q__2.r;
                 q__1.i = temp2.i + q__2.i;
                 temp2.r = q__1.r;

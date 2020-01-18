@@ -1,32 +1,38 @@
-use ::libc;
+use libc;
 /* f2c.h  --  Standard Fortran to C header file */
 /* *  barf  [ba:rf]  2.  "He suggested using FORTRAN, and everybody barfed."
 
-	- From The Shogakukan DICTIONARY OF NEW ENGLISH (Second edition) */
+- From The Shogakukan DICTIONARY OF NEW ENGLISH (Second edition) */
 pub type integer = libc::c_long;
 pub type real = libc::c_float;
 pub type logical = libc::c_long;
 /* ssymm.f -- translated by f2c (version 20061008).
    You must link the resulting object file with libf2c:
-	on Microsoft Windows system, link with libf2c.lib;
-	on Linux or Unix systems, link with .../path/to/libf2c.a -lm
-	or, if you install libf2c.a in a standard place, with -lf2c -lm
-	-- in that order, at the end of the command line, as in
-		cc *.o -lf2c -lm
-	Source for libf2c is in /netlib/f2c/libf2c.zip, e.g.,
+    on Microsoft Windows system, link with libf2c.lib;
+    on Linux or Unix systems, link with .../path/to/libf2c.a -lm
+    or, if you install libf2c.a in a standard place, with -lf2c -lm
+    -- in that order, at the end of the command line, as in
+        cc *.o -lf2c -lm
+    Source for libf2c is in /netlib/f2c/libf2c.zip, e.g.,
 
-		http://www.netlib.org/f2c/libf2c.zip
+        http://www.netlib.org/f2c/libf2c.zip
 */
 /* Subroutine */
 #[no_mangle]
-pub unsafe extern "C" fn f2c_ssymm(mut side: *mut libc::c_char,
-                                   mut uplo: *mut libc::c_char,
-                                   mut m: *mut integer, mut n: *mut integer,
-                                   mut alpha: *mut real, mut a: *mut real,
-                                   mut lda: *mut integer, mut b: *mut real,
-                                   mut ldb: *mut integer, mut beta: *mut real,
-                                   mut c__: *mut real, mut ldc: *mut integer)
- -> libc::c_int {
+pub unsafe extern "C" fn f2c_ssymm(
+    mut side: *mut libc::c_char,
+    mut uplo: *mut libc::c_char,
+    mut m: *mut integer,
+    mut n: *mut integer,
+    mut alpha: *mut real,
+    mut a: *mut real,
+    mut lda: *mut integer,
+    mut b: *mut real,
+    mut ldb: *mut integer,
+    mut beta: *mut real,
+    mut c__: *mut real,
+    mut ldc: *mut integer,
+) -> libc::c_int {
     /* System generated locals */
     let mut a_dim1: integer = 0;
     let mut a_offset: integer = 0;
@@ -55,114 +61,114 @@ pub unsafe extern "C" fn f2c_ssymm(mut side: *mut libc::c_char,
         fn xerbla__0(_: *mut libc::c_char, _: *mut integer) -> libc::c_int;
     }
     /*     .. Scalar Arguments .. */
-/*     .. */
-/*     .. Array Arguments .. */
-/*     .. */
+    /*     .. */
+    /*     .. Array Arguments .. */
+    /*     .. */
     /*  Purpose */
-/*  ======= */
+    /*  ======= */
     /*  SSYMM  performs one of the matrix-matrix operations */
     /*     C := alpha*A*B + beta*C, */
     /*  or */
     /*     C := alpha*B*A + beta*C, */
     /*  where alpha and beta are scalars,  A is a symmetric matrix and  B and */
-/*  C are  m by n matrices. */
+    /*  C are  m by n matrices. */
     /*  Arguments */
-/*  ========== */
+    /*  ========== */
     /*  SIDE   - CHARACTER*1. */
-/*           On entry,  SIDE  specifies whether  the  symmetric matrix  A */
-/*           appears on the  left or right  in the  operation as follows: */
+    /*           On entry,  SIDE  specifies whether  the  symmetric matrix  A */
+    /*           appears on the  left or right  in the  operation as follows: */
     /*              SIDE = 'L' or 'l'   C := alpha*A*B + beta*C, */
     /*              SIDE = 'R' or 'r'   C := alpha*B*A + beta*C, */
     /*           Unchanged on exit. */
     /*  UPLO   - CHARACTER*1. */
-/*           On  entry,   UPLO  specifies  whether  the  upper  or  lower */
-/*           triangular  part  of  the  symmetric  matrix   A  is  to  be */
-/*           referenced as follows: */
+    /*           On  entry,   UPLO  specifies  whether  the  upper  or  lower */
+    /*           triangular  part  of  the  symmetric  matrix   A  is  to  be */
+    /*           referenced as follows: */
     /*              UPLO = 'U' or 'u'   Only the upper triangular part of the */
-/*                                  symmetric matrix is to be referenced. */
+    /*                                  symmetric matrix is to be referenced. */
     /*              UPLO = 'L' or 'l'   Only the lower triangular part of the */
-/*                                  symmetric matrix is to be referenced. */
+    /*                                  symmetric matrix is to be referenced. */
     /*           Unchanged on exit. */
     /*  M      - INTEGER. */
-/*           On entry,  M  specifies the number of rows of the matrix  C. */
-/*           M  must be at least zero. */
-/*           Unchanged on exit. */
+    /*           On entry,  M  specifies the number of rows of the matrix  C. */
+    /*           M  must be at least zero. */
+    /*           Unchanged on exit. */
     /*  N      - INTEGER. */
-/*           On entry, N specifies the number of columns of the matrix C. */
-/*           N  must be at least zero. */
-/*           Unchanged on exit. */
+    /*           On entry, N specifies the number of columns of the matrix C. */
+    /*           N  must be at least zero. */
+    /*           Unchanged on exit. */
     /*  ALPHA  - REAL            . */
-/*           On entry, ALPHA specifies the scalar alpha. */
-/*           Unchanged on exit. */
+    /*           On entry, ALPHA specifies the scalar alpha. */
+    /*           Unchanged on exit. */
     /*  A      - REAL             array of DIMENSION ( LDA, ka ), where ka is */
-/*           m  when  SIDE = 'L' or 'l'  and is  n otherwise. */
-/*           Before entry  with  SIDE = 'L' or 'l',  the  m by m  part of */
-/*           the array  A  must contain the  symmetric matrix,  such that */
-/*           when  UPLO = 'U' or 'u', the leading m by m upper triangular */
-/*           part of the array  A  must contain the upper triangular part */
-/*           of the  symmetric matrix and the  strictly  lower triangular */
-/*           part of  A  is not referenced,  and when  UPLO = 'L' or 'l', */
-/*           the leading  m by m  lower triangular part  of the  array  A */
-/*           must  contain  the  lower triangular part  of the  symmetric */
-/*           matrix and the  strictly upper triangular part of  A  is not */
-/*           referenced. */
-/*           Before entry  with  SIDE = 'R' or 'r',  the  n by n  part of */
-/*           the array  A  must contain the  symmetric matrix,  such that */
-/*           when  UPLO = 'U' or 'u', the leading n by n upper triangular */
-/*           part of the array  A  must contain the upper triangular part */
-/*           of the  symmetric matrix and the  strictly  lower triangular */
-/*           part of  A  is not referenced,  and when  UPLO = 'L' or 'l', */
-/*           the leading  n by n  lower triangular part  of the  array  A */
-/*           must  contain  the  lower triangular part  of the  symmetric */
-/*           matrix and the  strictly upper triangular part of  A  is not */
-/*           referenced. */
-/*           Unchanged on exit. */
+    /*           m  when  SIDE = 'L' or 'l'  and is  n otherwise. */
+    /*           Before entry  with  SIDE = 'L' or 'l',  the  m by m  part of */
+    /*           the array  A  must contain the  symmetric matrix,  such that */
+    /*           when  UPLO = 'U' or 'u', the leading m by m upper triangular */
+    /*           part of the array  A  must contain the upper triangular part */
+    /*           of the  symmetric matrix and the  strictly  lower triangular */
+    /*           part of  A  is not referenced,  and when  UPLO = 'L' or 'l', */
+    /*           the leading  m by m  lower triangular part  of the  array  A */
+    /*           must  contain  the  lower triangular part  of the  symmetric */
+    /*           matrix and the  strictly upper triangular part of  A  is not */
+    /*           referenced. */
+    /*           Before entry  with  SIDE = 'R' or 'r',  the  n by n  part of */
+    /*           the array  A  must contain the  symmetric matrix,  such that */
+    /*           when  UPLO = 'U' or 'u', the leading n by n upper triangular */
+    /*           part of the array  A  must contain the upper triangular part */
+    /*           of the  symmetric matrix and the  strictly  lower triangular */
+    /*           part of  A  is not referenced,  and when  UPLO = 'L' or 'l', */
+    /*           the leading  n by n  lower triangular part  of the  array  A */
+    /*           must  contain  the  lower triangular part  of the  symmetric */
+    /*           matrix and the  strictly upper triangular part of  A  is not */
+    /*           referenced. */
+    /*           Unchanged on exit. */
     /*  LDA    - INTEGER. */
-/*           On entry, LDA specifies the first dimension of A as declared */
-/*           in the calling (sub) program.  When  SIDE = 'L' or 'l'  then */
-/*           LDA must be at least  max( 1, m ), otherwise  LDA must be at */
-/*           least  max( 1, n ). */
-/*           Unchanged on exit. */
+    /*           On entry, LDA specifies the first dimension of A as declared */
+    /*           in the calling (sub) program.  When  SIDE = 'L' or 'l'  then */
+    /*           LDA must be at least  max( 1, m ), otherwise  LDA must be at */
+    /*           least  max( 1, n ). */
+    /*           Unchanged on exit. */
     /*  B      - REAL             array of DIMENSION ( LDB, n ). */
-/*           Before entry, the leading  m by n part of the array  B  must */
-/*           contain the matrix B. */
-/*           Unchanged on exit. */
+    /*           Before entry, the leading  m by n part of the array  B  must */
+    /*           contain the matrix B. */
+    /*           Unchanged on exit. */
     /*  LDB    - INTEGER. */
-/*           On entry, LDB specifies the first dimension of B as declared */
-/*           in  the  calling  (sub)  program.   LDB  must  be  at  least */
-/*           max( 1, m ). */
-/*           Unchanged on exit. */
+    /*           On entry, LDB specifies the first dimension of B as declared */
+    /*           in  the  calling  (sub)  program.   LDB  must  be  at  least */
+    /*           max( 1, m ). */
+    /*           Unchanged on exit. */
     /*  BETA   - REAL            . */
-/*           On entry,  BETA  specifies the scalar  beta.  When  BETA  is */
-/*           supplied as zero then C need not be set on input. */
-/*           Unchanged on exit. */
+    /*           On entry,  BETA  specifies the scalar  beta.  When  BETA  is */
+    /*           supplied as zero then C need not be set on input. */
+    /*           Unchanged on exit. */
     /*  C      - REAL             array of DIMENSION ( LDC, n ). */
-/*           Before entry, the leading  m by n  part of the array  C must */
-/*           contain the matrix  C,  except when  beta  is zero, in which */
-/*           case C need not be set on entry. */
-/*           On exit, the array  C  is overwritten by the  m by n updated */
-/*           matrix. */
+    /*           Before entry, the leading  m by n  part of the array  C must */
+    /*           contain the matrix  C,  except when  beta  is zero, in which */
+    /*           case C need not be set on entry. */
+    /*           On exit, the array  C  is overwritten by the  m by n updated */
+    /*           matrix. */
     /*  LDC    - INTEGER. */
-/*           On entry, LDC specifies the first dimension of C as declared */
-/*           in  the  calling  (sub)  program.   LDC  must  be  at  least */
-/*           max( 1, m ). */
-/*           Unchanged on exit. */
+    /*           On entry, LDC specifies the first dimension of C as declared */
+    /*           in  the  calling  (sub)  program.   LDC  must  be  at  least */
+    /*           max( 1, m ). */
+    /*           Unchanged on exit. */
     /*  Level 3 Blas routine. */
     /*  -- Written on 8-February-1989. */
-/*     Jack Dongarra, Argonne National Laboratory. */
-/*     Iain Duff, AERE Harwell. */
-/*     Jeremy Du Croz, Numerical Algorithms Group Ltd. */
-/*     Sven Hammarling, Numerical Algorithms Group Ltd. */
+    /*     Jack Dongarra, Argonne National Laboratory. */
+    /*     Iain Duff, AERE Harwell. */
+    /*     Jeremy Du Croz, Numerical Algorithms Group Ltd. */
+    /*     Sven Hammarling, Numerical Algorithms Group Ltd. */
     /*     .. External Functions .. */
-/*     .. */
-/*     .. External Subroutines .. */
-/*     .. */
-/*     .. Intrinsic Functions .. */
-/*     .. */
-/*     .. Local Scalars .. */
-/*     .. */
-/*     .. Parameters .. */
-/*     .. */
+    /*     .. */
+    /*     .. External Subroutines .. */
+    /*     .. */
+    /*     .. Intrinsic Functions .. */
+    /*     .. */
+    /*     .. Local Scalars .. */
+    /*     .. */
+    /*     .. Parameters .. */
+    /*     .. */
     /*     Set NROWA as the number of rows of A. */
     /* Parameter adjustments */
     a_dim1 = *lda;
@@ -175,59 +181,80 @@ pub unsafe extern "C" fn f2c_ssymm(mut side: *mut libc::c_char,
     c_offset = 1 as libc::c_int as libc::c_long + c_dim1;
     c__ = c__.offset(-(c_offset as isize));
     /* Function Body */
-    if lsame__0(side,
-                b"L\x00" as *const u8 as *const libc::c_char as
-                    *mut libc::c_char) != 0 {
+    if lsame__0(
+        side,
+        b"L\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+    ) != 0
+    {
         nrowa = *m
-    } else { nrowa = *n }
-    upper =
-        lsame__0(uplo,
-                 b"U\x00" as *const u8 as *const libc::c_char as
-                     *mut libc::c_char);
+    } else {
+        nrowa = *n
+    }
+    upper = lsame__0(
+        uplo,
+        b"U\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+    );
     /*     Test the input parameters. */
     info = 0 as libc::c_int as integer;
-    if lsame__0(side,
-                b"L\x00" as *const u8 as *const libc::c_char as
-                    *mut libc::c_char) == 0 &&
-           lsame__0(side,
-                    b"R\x00" as *const u8 as *const libc::c_char as
-                        *mut libc::c_char) == 0 {
+    if lsame__0(
+        side,
+        b"L\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+    ) == 0
+        && lsame__0(
+            side,
+            b"R\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+        ) == 0
+    {
         info = 1 as libc::c_int as integer
-    } else if upper == 0 &&
-                  lsame__0(uplo,
-                           b"L\x00" as *const u8 as *const libc::c_char as
-                               *mut libc::c_char) == 0 {
+    } else if upper == 0
+        && lsame__0(
+            uplo,
+            b"L\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+        ) == 0
+    {
         info = 2 as libc::c_int as integer
     } else if *m < 0 as libc::c_int as libc::c_long {
         info = 3 as libc::c_int as integer
     } else if *n < 0 as libc::c_int as libc::c_long {
         info = 4 as libc::c_int as integer
-    } else if *lda <
-                  (if 1 as libc::c_int as libc::c_long >= nrowa {
-                       1 as libc::c_int as libc::c_long
-                   } else { nrowa }) {
+    } else if *lda
+        < (if 1 as libc::c_int as libc::c_long >= nrowa {
+            1 as libc::c_int as libc::c_long
+        } else {
+            nrowa
+        })
+    {
         info = 7 as libc::c_int as integer
-    } else if *ldb <
-                  (if 1 as libc::c_int as libc::c_long >= *m {
-                       1 as libc::c_int as libc::c_long
-                   } else { *m }) {
+    } else if *ldb
+        < (if 1 as libc::c_int as libc::c_long >= *m {
+            1 as libc::c_int as libc::c_long
+        } else {
+            *m
+        })
+    {
         info = 9 as libc::c_int as integer
-    } else if *ldc <
-                  (if 1 as libc::c_int as libc::c_long >= *m {
-                       1 as libc::c_int as libc::c_long
-                   } else { *m }) {
+    } else if *ldc
+        < (if 1 as libc::c_int as libc::c_long >= *m {
+            1 as libc::c_int as libc::c_long
+        } else {
+            *m
+        })
+    {
         info = 12 as libc::c_int as integer
     }
     if info != 0 as libc::c_int as libc::c_long {
-        xerbla__0(b"SSYMM \x00" as *const u8 as *const libc::c_char as
-                      *mut libc::c_char, &mut info);
-        return 0 as libc::c_int
+        xerbla__0(
+            b"SSYMM \x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+            &mut info,
+        );
+        return 0 as libc::c_int;
     }
     /*     Quick return if possible. */
-    if *m == 0 as libc::c_int as libc::c_long ||
-           *n == 0 as libc::c_int as libc::c_long ||
-           *alpha == 0.0f32 && *beta == 1.0f32 {
-        return 0 as libc::c_int
+    if *m == 0 as libc::c_int as libc::c_long
+        || *n == 0 as libc::c_int as libc::c_long
+        || *alpha == 0.0f32 && *beta == 1.0f32
+    {
+        return 0 as libc::c_int;
     }
     /*     And when  alpha.eq.zero. */
     if *alpha == 0.0f32 {
@@ -261,12 +288,14 @@ pub unsafe extern "C" fn f2c_ssymm(mut side: *mut libc::c_char,
                 j += 1
             }
         }
-        return 0 as libc::c_int
+        return 0 as libc::c_int;
     }
     /*     Start the operations. */
-    if lsame__0(side,
-                b"L\x00" as *const u8 as *const libc::c_char as
-                    *mut libc::c_char) != 0 {
+    if lsame__0(
+        side,
+        b"L\x00" as *const u8 as *const libc::c_char as *mut libc::c_char,
+    ) != 0
+    {
         /*        Form  C := alpha*A*B + beta*C. */
         if upper != 0 {
             i__1 = *n;
@@ -280,13 +309,10 @@ pub unsafe extern "C" fn f2c_ssymm(mut side: *mut libc::c_char,
                     i__3 = i__ - 1 as libc::c_int as libc::c_long;
                     k = 1 as libc::c_int as integer;
                     while k <= i__3 {
-                        let ref mut fresh0 =
-                            *c__.offset((k + j * c_dim1) as isize);
-                        *fresh0 +=
-                            temp1 * *a.offset((k + i__ * a_dim1) as isize);
-                        temp2 +=
-                            *b.offset((k + j * b_dim1) as isize) *
-                                *a.offset((k + i__ * a_dim1) as isize);
+                        let ref mut fresh0 = *c__.offset((k + j * c_dim1) as isize);
+                        *fresh0 += temp1 * *a.offset((k + i__ * a_dim1) as isize);
+                        temp2 += *b.offset((k + j * b_dim1) as isize)
+                            * *a.offset((k + i__ * a_dim1) as isize);
                         k += 1
                         /* L70: */
                         /* L60: */
@@ -294,14 +320,12 @@ pub unsafe extern "C" fn f2c_ssymm(mut side: *mut libc::c_char,
                     }
                     if *beta == 0.0f32 {
                         *c__.offset((i__ + j * c_dim1) as isize) =
-                            temp1 * *a.offset((i__ + i__ * a_dim1) as isize) +
-                                *alpha * temp2
+                            temp1 * *a.offset((i__ + i__ * a_dim1) as isize) + *alpha * temp2
                     } else {
-                        *c__.offset((i__ + j * c_dim1) as isize) =
-                            *beta * *c__.offset((i__ + j * c_dim1) as isize) +
-                                temp1 *
-                                    *a.offset((i__ + i__ * a_dim1) as isize) +
-                                *alpha * temp2
+                        *c__.offset((i__ + j * c_dim1) as isize) = *beta
+                            * *c__.offset((i__ + j * c_dim1) as isize)
+                            + temp1 * *a.offset((i__ + i__ * a_dim1) as isize)
+                            + *alpha * temp2
                     }
                     i__ += 1
                 }
@@ -318,27 +342,22 @@ pub unsafe extern "C" fn f2c_ssymm(mut side: *mut libc::c_char,
                     i__2 = *m;
                     k = i__ + 1 as libc::c_int as libc::c_long;
                     while k <= i__2 {
-                        let ref mut fresh1 =
-                            *c__.offset((k + j * c_dim1) as isize);
-                        *fresh1 +=
-                            temp1 * *a.offset((k + i__ * a_dim1) as isize);
-                        temp2 +=
-                            *b.offset((k + j * b_dim1) as isize) *
-                                *a.offset((k + i__ * a_dim1) as isize);
+                        let ref mut fresh1 = *c__.offset((k + j * c_dim1) as isize);
+                        *fresh1 += temp1 * *a.offset((k + i__ * a_dim1) as isize);
+                        temp2 += *b.offset((k + j * b_dim1) as isize)
+                            * *a.offset((k + i__ * a_dim1) as isize);
                         k += 1
                         /* L90: */
                         /* L80: */
                     }
                     if *beta == 0.0f32 {
                         *c__.offset((i__ + j * c_dim1) as isize) =
-                            temp1 * *a.offset((i__ + i__ * a_dim1) as isize) +
-                                *alpha * temp2
+                            temp1 * *a.offset((i__ + i__ * a_dim1) as isize) + *alpha * temp2
                     } else {
-                        *c__.offset((i__ + j * c_dim1) as isize) =
-                            *beta * *c__.offset((i__ + j * c_dim1) as isize) +
-                                temp1 *
-                                    *a.offset((i__ + i__ * a_dim1) as isize) +
-                                *alpha * temp2
+                        *c__.offset((i__ + j * c_dim1) as isize) = *beta
+                            * *c__.offset((i__ + j * c_dim1) as isize)
+                            + temp1 * *a.offset((i__ + i__ * a_dim1) as isize)
+                            + *alpha * temp2
                     }
                     i__ -= 1
                 }
@@ -366,9 +385,9 @@ pub unsafe extern "C" fn f2c_ssymm(mut side: *mut libc::c_char,
                 i__2 = *m;
                 i__ = 1 as libc::c_int as integer;
                 while i__ <= i__2 {
-                    *c__.offset((i__ + j * c_dim1) as isize) =
-                        *beta * *c__.offset((i__ + j * c_dim1) as isize) +
-                            temp1 * *b.offset((i__ + j * b_dim1) as isize);
+                    *c__.offset((i__ + j * c_dim1) as isize) = *beta
+                        * *c__.offset((i__ + j * c_dim1) as isize)
+                        + temp1 * *b.offset((i__ + j * b_dim1) as isize);
                     i__ += 1
                     /* L120: */
                 }
@@ -384,8 +403,7 @@ pub unsafe extern "C" fn f2c_ssymm(mut side: *mut libc::c_char,
                 i__3 = *m;
                 i__ = 1 as libc::c_int as integer;
                 while i__ <= i__3 {
-                    let ref mut fresh2 =
-                        *c__.offset((i__ + j * c_dim1) as isize);
+                    let ref mut fresh2 = *c__.offset((i__ + j * c_dim1) as isize);
                     *fresh2 += temp1 * *b.offset((i__ + k * b_dim1) as isize);
                     i__ += 1
                     /* L140: */
@@ -404,8 +422,7 @@ pub unsafe extern "C" fn f2c_ssymm(mut side: *mut libc::c_char,
                 i__3 = *m;
                 i__ = 1 as libc::c_int as integer;
                 while i__ <= i__3 {
-                    let ref mut fresh3 =
-                        *c__.offset((i__ + j * c_dim1) as isize);
+                    let ref mut fresh3 = *c__.offset((i__ + j * c_dim1) as isize);
                     *fresh3 += temp1 * *b.offset((i__ + k * b_dim1) as isize);
                     i__ += 1
                     /* L160: */

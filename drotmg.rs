@@ -1,29 +1,30 @@
-use ::libc;
+use libc;
 /* f2c.h  --  Standard Fortran to C header file */
 /* *  barf  [ba:rf]  2.  "He suggested using FORTRAN, and everybody barfed."
 
-	- From The Shogakukan DICTIONARY OF NEW ENGLISH (Second edition) */
+- From The Shogakukan DICTIONARY OF NEW ENGLISH (Second edition) */
 pub type integer = libc::c_long;
 pub type doublereal = libc::c_double;
 /* drotmg.f -- translated by f2c (version 20061008).
    You must link the resulting object file with libf2c:
-	on Microsoft Windows system, link with libf2c.lib;
-	on Linux or Unix systems, link with .../path/to/libf2c.a -lm
-	or, if you install libf2c.a in a standard place, with -lf2c -lm
-	-- in that order, at the end of the command line, as in
-		cc *.o -lf2c -lm
-	Source for libf2c is in /netlib/f2c/libf2c.zip, e.g.,
+    on Microsoft Windows system, link with libf2c.lib;
+    on Linux or Unix systems, link with .../path/to/libf2c.a -lm
+    or, if you install libf2c.a in a standard place, with -lf2c -lm
+    -- in that order, at the end of the command line, as in
+        cc *.o -lf2c -lm
+    Source for libf2c is in /netlib/f2c/libf2c.zip, e.g.,
 
-		http://www.netlib.org/f2c/libf2c.zip
+        http://www.netlib.org/f2c/libf2c.zip
 */
 /* Subroutine */
 #[no_mangle]
-pub unsafe extern "C" fn f2c_drotmg(mut dd1: *mut doublereal,
-                                    mut dd2: *mut doublereal,
-                                    mut dx1: *mut doublereal,
-                                    mut dy1: *mut doublereal,
-                                    mut dparam: *mut doublereal)
- -> libc::c_int {
+pub unsafe extern "C" fn f2c_drotmg(
+    mut dd1: *mut doublereal,
+    mut dd2: *mut doublereal,
+    mut dx1: *mut doublereal,
+    mut dy1: *mut doublereal,
+    mut dparam: *mut doublereal,
+) -> libc::c_int {
     let mut current_block: u64;
     /* Initialized data */
     static mut zero: doublereal = 0.0f64;
@@ -53,50 +54,49 @@ pub unsafe extern "C" fn f2c_drotmg(mut dd1: *mut doublereal,
     let mut dflag: doublereal = 0.;
     let mut dtemp: doublereal = 0.;
     /* Assigned format variables */
-    static mut igo_fmt: *mut libc::c_char =
-        0 as *const libc::c_char as *mut libc::c_char;
+    static mut igo_fmt: *mut libc::c_char = 0 as *const libc::c_char as *mut libc::c_char;
     /*     .. Scalar Arguments .. */
-/*     .. */
-/*     .. Array Arguments .. */
-/*     .. */
+    /*     .. */
+    /*     .. Array Arguments .. */
+    /*     .. */
     /*  Purpose */
-/*  ======= */
+    /*  ======= */
     /*     CONSTRUCT THE MODIFIED GIVENS TRANSFORMATION MATRIX H WHICH ZEROS */
-/*     THE SECOND COMPONENT OF THE 2-VECTOR  (DSQRT(DD1)*DX1,DSQRT(DD2)* */
-/*     DY2)**T. */
-/*     WITH DPARAM(1)=DFLAG, H HAS ONE OF THE FOLLOWING FORMS.. */
+    /*     THE SECOND COMPONENT OF THE 2-VECTOR  (DSQRT(DD1)*DX1,DSQRT(DD2)* */
+    /*     DY2)**T. */
+    /*     WITH DPARAM(1)=DFLAG, H HAS ONE OF THE FOLLOWING FORMS.. */
     /*     DFLAG=-1.D0     DFLAG=0.D0        DFLAG=1.D0     DFLAG=-2.D0 */
     /*       (DH11  DH12)    (1.D0  DH12)    (DH11  1.D0)    (1.D0  0.D0) */
-/*     H=(          )    (          )    (          )    (          ) */
-/*       (DH21  DH22),   (DH21  1.D0),   (-1.D0 DH22),   (0.D0  1.D0). */
-/*     LOCATIONS 2-4 OF DPARAM CONTAIN DH11, DH21, DH12, AND DH22 */
-/*     RESPECTIVELY. (VALUES OF 1.D0, -1.D0, OR 0.D0 IMPLIED BY THE */
-/*     VALUE OF DPARAM(1) ARE NOT STORED IN DPARAM.) */
+    /*     H=(          )    (          )    (          )    (          ) */
+    /*       (DH21  DH22),   (DH21  1.D0),   (-1.D0 DH22),   (0.D0  1.D0). */
+    /*     LOCATIONS 2-4 OF DPARAM CONTAIN DH11, DH21, DH12, AND DH22 */
+    /*     RESPECTIVELY. (VALUES OF 1.D0, -1.D0, OR 0.D0 IMPLIED BY THE */
+    /*     VALUE OF DPARAM(1) ARE NOT STORED IN DPARAM.) */
     /*     THE VALUES OF GAMSQ AND RGAMSQ SET IN THE DATA STATEMENT MAY BE */
-/*     INEXACT.  THIS IS OK AS THEY ARE ONLY USED FOR TESTING THE SIZE */
-/*     OF DD1 AND DD2.  ALL ACTUAL SCALING OF DATA IS DONE USING GAM. */
+    /*     INEXACT.  THIS IS OK AS THEY ARE ONLY USED FOR TESTING THE SIZE */
+    /*     OF DD1 AND DD2.  ALL ACTUAL SCALING OF DATA IS DONE USING GAM. */
     /*  Arguments */
-/*  ========= */
+    /*  ========= */
     /*  DD1    (input/output) DOUBLE PRECISION */
     /*  DD2    (input/output) DOUBLE PRECISION */
     /*  DX1    (input/output) DOUBLE PRECISION */
     /*  DY1    (input) DOUBLE PRECISION */
     /*  DPARAM (input/output)  DOUBLE PRECISION array, dimension 5 */
-/*     DPARAM(1)=DFLAG */
-/*     DPARAM(2)=DH11 */
-/*     DPARAM(3)=DH21 */
-/*     DPARAM(4)=DH12 */
-/*     DPARAM(5)=DH22 */
+    /*     DPARAM(1)=DFLAG */
+    /*     DPARAM(2)=DH11 */
+    /*     DPARAM(3)=DH21 */
+    /*     DPARAM(4)=DH12 */
+    /*     DPARAM(5)=DH22 */
     /*  ===================================================================== */
     /*     .. Local Scalars .. */
-/*     .. */
-/*     .. Intrinsic Functions .. */
-/*     .. */
-/*     .. Data statements .. */
+    /*     .. */
+    /*     .. Intrinsic Functions .. */
+    /*     .. */
+    /*     .. Data statements .. */
     /* Parameter adjustments */
     dparam = dparam.offset(-1);
     /* Function Body */
-/*     .. */
+    /*     .. */
     if !(*dd1 < zero) {
         /*     CASE-DD1-NONNEGATIVE */
         dp2 = *dd2 * *dy1;
@@ -106,11 +106,14 @@ pub unsafe extern "C" fn f2c_drotmg(mut dd1: *mut doublereal,
             dq2 = dp2 * *dy1;
             dq1 = dp1 * *dx1;
             if !((if dq1 >= 0 as libc::c_int as libc::c_double {
-                      dq1
-                  } else { -dq1 }) >
-                     (if dq2 >= 0 as libc::c_int as libc::c_double {
-                          dq2
-                      } else { -dq2 })) {
+                dq1
+            } else {
+                -dq1
+            }) > (if dq2 >= 0 as libc::c_int as libc::c_double {
+                dq2
+            } else {
+                -dq2
+            })) {
                 if !(dq2 < zero) {
                     dflag = one;
                     dh11 = dp1 / dp2;
@@ -143,121 +146,127 @@ pub unsafe extern "C" fn f2c_drotmg(mut dd1: *mut doublereal,
                 }
             }
             match current_block {
-                1219181519538965718 => { }
+                1219181519538965718 => {}
                 _ => {
-                    'c_670:
-                        loop 
-                             /*     PROCEDURE..SCALE-CHECK */
-                             {
-                            if !(*dd1 <= rgamsq) {
-                                current_block = 9361680084571800209;
-                            } else if *dd1 == zero {
-                                current_block = 9432909789281843485;
-                            } else {
-                                igo = 0 as libc::c_int as integer;
-                                igo_fmt = fmt_120.as_mut_ptr();
+                    'c_670: loop
+                    /*     PROCEDURE..SCALE-CHECK */
+                    {
+                        if !(*dd1 <= rgamsq) {
+                            current_block = 9361680084571800209;
+                        } else if *dd1 == zero {
+                            current_block = 9432909789281843485;
+                        } else {
+                            igo = 0 as libc::c_int as integer;
+                            igo_fmt = fmt_120.as_mut_ptr();
+                            /*              FIX-H.. */
+                            current_block = 16457600364537029179;
+                        }
+                        loop {
+                            match current_block {
+                                9361680084571800209 => {
+                                    if !(*dd1 >= gamsq) {
+                                        current_block = 9432909789281843485;
+                                        continue;
+                                    }
+                                    igo = 1 as libc::c_int as integer;
+                                    igo_fmt = fmt_150.as_mut_ptr();
+                                    /*              FIX-H.. */
+                                    current_block = 16457600364537029179;
+                                    continue;
+                                }
+                                16457600364537029179 =>
                                 /*              FIX-H.. */
-                                current_block = 16457600364537029179;
-                            }
-                            loop  {
-                                match current_block {
-                                    9361680084571800209 => {
-                                        if !(*dd1 >= gamsq) {
-                                            current_block =
-                                                9432909789281843485;
-                                            continue ;
+                                {
+                                    if dflag >= zero {
+                                        if !(dflag == zero) {
+                                            dh21 = -one;
+                                            dh12 = one;
+                                            dflag = -one
+                                        } else {
+                                            dh11 = one;
+                                            dh22 = one;
+                                            dflag = -one
                                         }
-                                        igo = 1 as libc::c_int as integer;
-                                        igo_fmt = fmt_150.as_mut_ptr();
+                                    }
+                                    match igo {
+                                        0 => {
+                                            break;
+                                        }
+                                        1 => {
+                                            /* Computing 2nd power */
+                                            d__1 = gam;
+                                            *dd1 /= d__1 * d__1;
+                                            *dx1 *= gam;
+                                            dh11 *= gam;
+                                            dh12 *= gam;
+                                            current_block = 9361680084571800209;
+                                            continue;
+                                        }
+                                        2 => {
+                                            /* Computing 2nd power */
+                                            d__1 = gam;
+                                            *dd2 *= d__1 * d__1;
+                                            dh21 /= gam;
+                                            dh22 /= gam;
+                                            current_block = 9432909789281843485;
+                                            continue;
+                                        }
+                                        3 => {
+                                            /* Computing 2nd power */
+                                            d__1 = gam;
+                                            *dd2 /= d__1 * d__1;
+                                            dh21 *= gam;
+                                            dh22 *= gam
+                                        }
+                                        _ => {
+                                            continue 'c_670;
+                                        }
+                                    }
+                                }
+                                _ => {
+                                    if (if *dd2 >= 0 as libc::c_int as libc::c_double {
+                                        *dd2
+                                    } else {
+                                        -*dd2
+                                    }) <= rgamsq
+                                    {
+                                        if *dd2 == zero {
+                                            break 'c_670;
+                                        }
+                                        igo = 2 as libc::c_int as integer;
+                                        igo_fmt = fmt_180.as_mut_ptr();
                                         /*              FIX-H.. */
                                         current_block = 16457600364537029179;
-                                        continue ;
-                                    }
-                                    16457600364537029179 =>
-                                    /*              FIX-H.. */
-                                    {
-                                        if dflag >= zero {
-                                            if !(dflag == zero) {
-                                                dh21 = -one;
-                                                dh12 = one;
-                                                dflag = -one
-                                            } else {
-                                                dh11 = one;
-                                                dh22 = one;
-                                                dflag = -one
-                                            }
-                                        }
-                                        match igo {
-                                            0 => { break ; }
-                                            1 => {
-                                                /* Computing 2nd power */
-                                                d__1 = gam;
-                                                *dd1 /= d__1 * d__1;
-                                                *dx1 *= gam;
-                                                dh11 *= gam;
-                                                dh12 *= gam;
-                                                current_block =
-                                                    9361680084571800209;
-                                                continue ;
-                                            }
-                                            2 => {
-                                                /* Computing 2nd power */
-                                                d__1 = gam;
-                                                *dd2 *= d__1 * d__1;
-                                                dh21 /= gam;
-                                                dh22 /= gam;
-                                                current_block =
-                                                    9432909789281843485;
-                                                continue ;
-                                            }
-                                            3 => {
-                                                /* Computing 2nd power */
-                                                d__1 = gam;
-                                                *dd2 /= d__1 * d__1;
-                                                dh21 *= gam;
-                                                dh22 *= gam
-                                            }
-                                            _ => { continue 'c_670 ; }
-                                        }
-                                    }
-                                    _ => {
-                                        if (if *dd2 >=
-                                                   0 as libc::c_int as
-                                                       libc::c_double {
-                                                *dd2
-                                            } else { -*dd2 }) <= rgamsq {
-                                            if *dd2 == zero { break 'c_670 ; }
-                                            igo = 2 as libc::c_int as integer;
-                                            igo_fmt = fmt_180.as_mut_ptr();
-                                            /*              FIX-H.. */
-                                            current_block =
-                                                16457600364537029179;
-                                            continue ;
-                                        }
+                                        continue;
                                     }
                                 }
-                                if !((if *dd2 >=
-                                             0 as libc::c_int as
-                                                 libc::c_double {
-                                          *dd2
-                                      } else { -*dd2 }) >= gamsq) {
-                                    break 'c_670 ;
-                                }
-                                igo = 3 as libc::c_int as integer;
-                                igo_fmt = fmt_210.as_mut_ptr();
-                                current_block = 16457600364537029179;
                             }
-                            /* Computing 2nd power */
-                            d__1 = gam;
-                            *dd1 *= d__1 * d__1;
-                            *dx1 /= gam;
-                            dh11 /= gam;
-                            dh12 /= gam
+                            if !((if *dd2 >= 0 as libc::c_int as libc::c_double {
+                                *dd2
+                            } else {
+                                -*dd2
+                            }) >= gamsq)
+                            {
+                                break 'c_670;
+                            }
+                            igo = 3 as libc::c_int as integer;
+                            igo_fmt = fmt_210.as_mut_ptr();
+                            current_block = 16457600364537029179;
                         }
+                        /* Computing 2nd power */
+                        d__1 = gam;
+                        *dd1 *= d__1 * d__1;
+                        *dx1 /= gam;
+                        dh11 /= gam;
+                        dh12 /= gam
+                    }
                     current_block = 11662017948461917171;
                 }
             }
-        } else { dflag = -two; current_block = 17685814418459604237; }
+        } else {
+            dflag = -two;
+            current_block = 17685814418459604237;
+        }
     } else {
         /*       GO ZERO-H-D-AND-DX1.. */
         current_block = 1219181519538965718;
@@ -276,7 +285,7 @@ pub unsafe extern "C" fn f2c_drotmg(mut dd1: *mut doublereal,
             *dx1 = zero;
             current_block = 11662017948461917171;
         }
-        _ => { }
+        _ => {}
     }
     match current_block {
         11662017948461917171 =>
@@ -295,7 +304,7 @@ pub unsafe extern "C" fn f2c_drotmg(mut dd1: *mut doublereal,
                 *dparam.offset(5 as libc::c_int as isize) = dh22
             }
         }
-        _ => { }
+        _ => {}
     }
     *dparam.offset(1 as libc::c_int as isize) = dflag;
     return 0 as libc::c_int;
